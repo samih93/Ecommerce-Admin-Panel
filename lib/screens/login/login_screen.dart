@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:provider/provider.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({Key? key}) : super(key: key);
@@ -77,15 +79,15 @@ class LoginScreen extends StatelessWidget {
                         onpress: () {
                           if (_formkey.currentState!.validate()) {
                             context.read<AuthController>()
-                              ..signInWithEmailAndPassword(
-                                      text_emailcontroller.text.trim(),
+                              ..signIn(text_emailcontroller.text.trim(),
                                       text_passwordcontroller.text.toString())
                                   .then((value) {
-                                text_emailcontroller.clear();
-                                text_passwordcontroller.clear();
-                                currentuserModel = value;
-                                print("sign in successfully");
-                                context.read<MenuController>()..buildMenu();
+                                if (value != null) {
+                                  text_emailcontroller.clear();
+                                  text_passwordcontroller.clear();
+                                  print("sign in successfully");
+                                  context.read<MenuController>()..buildMenu();
+                                } else {}
                               });
                           }
                         }),

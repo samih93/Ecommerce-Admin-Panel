@@ -1,3 +1,5 @@
+import 'package:ecommerce_admin_panel/controllers/auth_controller.dart';
+import 'package:ecommerce_admin_panel/models/UserModel.dart';
 import 'package:ecommerce_admin_panel/models/menu_model.dart';
 import 'package:ecommerce_admin_panel/screens/dashboard/dashboard_screen.dart';
 import 'package:ecommerce_admin_panel/screens/login/login_screen.dart';
@@ -6,9 +8,11 @@ import 'package:ecommerce_admin_panel/shared/constants.dart';
 import 'package:flutter/material.dart';
 
 class MenuController extends ChangeNotifier {
+  final AuthController? _authProvider;
+
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  MenuController() {
+  MenuController(this._authProvider) {
     buildMenu();
   }
 
@@ -61,7 +65,7 @@ class MenuController extends ChangeNotifier {
   var screens_title = [];
   var screens = [];
   void buildMenu() {
-    if (currentuserModel == null) {
+    if (_authProvider != null && _authProvider!.currentuserModel == null) {
       screens_title = _offline_screens_title;
       menuModelList = _offline_menuModelList;
       screens = _offline_screen;

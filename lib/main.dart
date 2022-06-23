@@ -42,10 +42,11 @@ class MyApp extends StatelessWidget {
       home: MultiProvider(
         providers: [
           ChangeNotifierProvider(
-            create: (context) => MenuController(),
-          ),
-          ChangeNotifierProvider(
             create: (context) => AuthController(),
+          ),
+          ChangeNotifierProxyProvider<AuthController, MenuController>(
+            update: (context, auth, previousMessages) => MenuController(auth),
+            create: (BuildContext context) => MenuController(null),
           ),
           ChangeNotifierProvider(
             create: (context) => ProductController()..getAllorders(),

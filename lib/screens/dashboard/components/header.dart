@@ -1,4 +1,5 @@
 import 'package:ecommerce_admin_panel/controllers/MenuController.dart';
+import 'package:ecommerce_admin_panel/controllers/auth_controller.dart';
 import 'package:ecommerce_admin_panel/controllers/product_controller.dart';
 import 'package:ecommerce_admin_panel/shared/responsive.dart';
 import 'package:flutter/material.dart';
@@ -64,7 +65,11 @@ class ProfileCard extends StatelessWidget {
             Padding(
               padding:
                   const EdgeInsets.symmetric(horizontal: defaultPadding / 2),
-              child: Text("Samih damaj"),
+              child: Consumer<AuthController>(
+                builder: (context, controller, child) {
+                  return Text(controller.currentuserModel!.email.toString());
+                },
+              ),
             ),
           Icon(Icons.keyboard_arrow_down),
         ],

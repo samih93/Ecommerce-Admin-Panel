@@ -8,10 +8,11 @@ class AuthController extends ChangeNotifier {
   bool isloadingSignIn = false;
   String errorMessage = "";
 
+  UserModel? currentuserModel;
+
   FirebaseAuth _auth = FirebaseAuth.instance;
 
-  Future<UserModel?> signInWithEmailAndPassword(
-      String email, String password) async {
+  Future<UserModel?> signIn(String email, String password) async {
     UserModel? userModel;
     isloadingSignIn = true;
     notifyListeners();
@@ -25,23 +26,23 @@ class AuthController extends ChangeNotifier {
             pic: '',
             userId: value.user?.uid);
         isloadingSignIn = false;
-        notifyListeners();
+        currentuserModel = userModel;
 
-        // _getCurrentUser(user.user.uid);
-      }); // .then((value) => print(value));
-      //Get.offAll(() => EcommerceLayout(), binding: HomeViewBinding());
+        notifyListeners();
+      });
     } catch (e) {
       isloadingSignIn = false;
 
       errorMessage = e.toString();
       notifyListeners();
-      print(e.toString());
+      //  print(e.toString());
     }
-    return userModel;
+    return currentuserModel;
   }
 
   Future SignOut() async {
     await FirebaseAuth.instance.signOut();
     currentuserModel = null;
+    notifyListeners();
   }
 }
