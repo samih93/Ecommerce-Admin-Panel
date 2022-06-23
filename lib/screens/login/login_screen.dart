@@ -69,24 +69,26 @@ class LoginScreen extends StatelessWidget {
                 SizedBox(
                   height: 30,
                 ),
-                defaultButton(
-                    text: "Sign In",
-                    height: 50,
-                    onpress: () {
-                      if (_formkey.currentState!.validate()) {
-                        context.read<AuthController>()
-                          ..signInWithEmailAndPassword(
-                                  text_emailcontroller.text.trim(),
-                                  text_passwordcontroller.text.toString())
-                              .then((value) {
-                            text_emailcontroller.clear();
-                            text_passwordcontroller.clear();
-                            currentuserModel = value;
-                            print("sign in successfully");
-                            context.read<MenuController>()..buildMenu();
-                          });
-                      }
-                    }),
+                context.watch<AuthController>().isloadingSignIn
+                    ? CircularProgressIndicator()
+                    : defaultButton(
+                        text: "Sign In",
+                        height: 50,
+                        onpress: () {
+                          if (_formkey.currentState!.validate()) {
+                            context.read<AuthController>()
+                              ..signInWithEmailAndPassword(
+                                      text_emailcontroller.text.trim(),
+                                      text_passwordcontroller.text.toString())
+                                  .then((value) {
+                                text_emailcontroller.clear();
+                                text_passwordcontroller.clear();
+                                currentuserModel = value;
+                                print("sign in successfully");
+                                context.read<MenuController>()..buildMenu();
+                              });
+                          }
+                        }),
               ],
             ),
           ),
