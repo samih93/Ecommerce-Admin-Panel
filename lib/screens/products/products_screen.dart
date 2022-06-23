@@ -24,7 +24,7 @@ class _ProductScreenState extends State<ProductScreen> {
   }
 
   Future<void> getProductData() async {
-    context.read<ProductController>()..getallProduct();
+    context.read<ProductController>()..getAllorders();
   }
 
   // final DataGridController _dataGridController = DataGridController();
@@ -32,31 +32,31 @@ class _ProductScreenState extends State<ProductScreen> {
   @override
   Widget build(BuildContext context) {
     ProductController productController = Provider.of(context);
-    productDataSource =
-        ProductDataSource(context, productController.list_of_product);
+    // productDataSource =
+    //     ProductDataSource(context, productController.list_of_product);
     return productController.isloadingGetProduct == true
         ? Center(
             child: CircularProgressIndicator(),
           )
         : Column(
             children: [
-              Container(
-                padding: EdgeInsets.all(3),
-                height: MediaQuery.of(context).size.height * .6,
-                child: SfDataGrid(
-                  onQueryRowHeight: (details) {
-                    // Set the row height as 70.0 to the column header row.
-                    return details.rowIndex == 0 ? 70.0 : 49.0;
-                  },
-                  allowEditing: true,
-                  allowSorting: true,
-                  selectionMode: SelectionMode.single,
-                  navigationMode: GridNavigationMode.cell,
-                  source: productDataSource,
-                  columnWidthMode: ColumnWidthMode.fill,
-                  columns: getColumns(),
-                ),
-              ),
+              // Container(
+              //   padding: EdgeInsets.all(3),
+              //   height: MediaQuery.of(context).size.height * .6,
+              //   child: SfDataGrid(
+              //     onQueryRowHeight: (details) {
+              //       // Set the row height as 70.0 to the column header row.
+              //       return details.rowIndex == 0 ? 70.0 : 49.0;
+              //     },
+              //     allowEditing: true,
+              //     allowSorting: true,
+              //     selectionMode: SelectionMode.single,
+              //     navigationMode: GridNavigationMode.cell,
+              //     source: productDataSource,
+              //     columnWidthMode: ColumnWidthMode.fill,
+              //     columns: getColumns(),
+              //   ),
+              // ),
             ],
           );
   }

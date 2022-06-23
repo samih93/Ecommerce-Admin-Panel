@@ -1,4 +1,5 @@
 import 'package:ecommerce_admin_panel/controllers/MenuController.dart';
+import 'package:ecommerce_admin_panel/controllers/auth_controller.dart';
 import 'package:ecommerce_admin_panel/models/menu_model.dart';
 import 'package:ecommerce_admin_panel/shared/constants.dart';
 import 'package:ecommerce_admin_panel/shared/responsive.dart';
@@ -54,12 +55,19 @@ class DrawerListTile extends StatelessWidget {
             selected: true,
             selectedColor: Colors.grey.shade400,
             onTap: () {
-              context.read<MenuController>().onChangeSelectedMenu(i);
-              print(listOfModel[i].title.toString() +
-                  " - " +
-                  listOfModel[i].isselected.toString());
-              if (Responsive.isMobile(context) || Responsive.isTablet(context))
-                Navigator.pop(context);
+              if (i != 8) {
+                context.read<MenuController>().onChangeSelectedMenu(i);
+                print(listOfModel[i].title.toString() +
+                    " - " +
+                    listOfModel[i].isselected.toString());
+                if (Responsive.isMobile(context) ||
+                    Responsive.isTablet(context)) Navigator.pop(context);
+              } else {
+                context.read<AuthController>()
+                  ..SignOut().then((value) {
+                    context.read<MenuController>()..buildMenu();
+                  });
+              }
             },
             horizontalTitleGap: 0.0,
             leading: SvgPicture.asset(

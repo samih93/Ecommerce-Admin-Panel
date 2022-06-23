@@ -1,26 +1,35 @@
 import 'package:ecommerce_admin_panel/models/menu_model.dart';
 import 'package:ecommerce_admin_panel/screens/dashboard/dashboard_screen.dart';
+import 'package:ecommerce_admin_panel/screens/login/login_screen.dart';
 import 'package:ecommerce_admin_panel/screens/products/products_screen.dart';
-import 'package:ecommerce_admin_panel/screens/transactions/transactions.dart';
+import 'package:ecommerce_admin_panel/shared/constants.dart';
 import 'package:flutter/material.dart';
 
 class MenuController extends ChangeNotifier {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
+  MenuController() {
+    buildMenu();
+  }
+
   GlobalKey<ScaffoldState> get scaffoldKey => _scaffoldKey;
 
-  final screens = [
+  final _offline_screen = [LoginScreen()];
+
+  final _screens = [
     DashboardScreen(),
-    TransactionsScreen(),
     ProductScreen(),
-    TransactionsScreen(),
-    TransactionsScreen(),
-    TransactionsScreen(),
-    TransactionsScreen(),
-    TransactionsScreen(),
+    ProductScreen(),
+    ProductScreen(),
+    ProductScreen(),
+    ProductScreen(),
+    ProductScreen(),
+    ProductScreen(),
+    ProductScreen(),
   ];
 
-  final screens_title = [
+  final _offline_screens_title = ['Login'];
+  final _screens_title = [
     'Dashboard',
     'Transaction',
     'Products',
@@ -29,9 +38,14 @@ class MenuController extends ChangeNotifier {
     'Notification',
     'Profile',
     'Settings'
+        'Logout'
   ];
 
-  List<MenuModel> menuModelList = [
+  List<MenuModel> _offline_menuModelList = [
+    MenuModel("login", "assets/icons/menu_login.svg")
+  ];
+
+  List<MenuModel> _menuModelList = [
     MenuModel("Dashboard", "assets/icons/menu_dashbord.svg", isselected: true),
     MenuModel("Transaction", "assets/icons/menu_tran.svg"),
     MenuModel("Products", "assets/icons/menu_task.svg"),
@@ -40,7 +54,24 @@ class MenuController extends ChangeNotifier {
     MenuModel("Notification", "assets/icons/menu_notification.svg"),
     MenuModel("Profile", "assets/icons/menu_profile.svg"),
     MenuModel("Settings", "assets/icons/menu_setting.svg"),
+    MenuModel("Logout", "assets/icons/menu_logout.svg"),
   ];
+
+  List<MenuModel> menuModelList = [];
+  var screens_title = [];
+  var screens = [];
+  void buildMenu() {
+    if (currentuserModel == null) {
+      screens_title = _offline_screens_title;
+      menuModelList = _offline_menuModelList;
+      screens = _offline_screen;
+    } else {
+      screens_title = _screens_title;
+      menuModelList = _menuModelList;
+      screens = _screens;
+    }
+    notifyListeners();
+  }
 
   void controlMenu() {
     if (!_scaffoldKey.currentState!.isDrawerOpen) {

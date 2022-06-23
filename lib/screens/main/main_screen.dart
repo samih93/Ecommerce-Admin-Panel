@@ -27,18 +27,16 @@ class MainScreen extends StatelessWidget {
             Expanded(
               // It takes 5/6 part of the screen
               flex: 5,
-              child: SafeArea(
-                child: SingleChildScrollView(
-                  primary: false,
-                  padding: EdgeInsets.all(defaultPadding),
-                  child: Column(
-                    children: [
-                      Header(),
-                      SizedBox(height: defaultPadding),
-                      context.watch<MenuController>().screens[
-                          context.watch<MenuController>().currentSelectedIndex],
-                    ],
-                  ),
+              child: SingleChildScrollView(
+                padding: EdgeInsets.all(defaultPadding),
+                primary: false,
+                child: Column(
+                  children: [
+                    if (currentuserModel != null) Header(),
+                    SizedBox(height: defaultPadding),
+                    context.watch<MenuController>().screens[
+                        context.watch<MenuController>().currentSelectedIndex],
+                  ],
                 ),
               ),
             ),

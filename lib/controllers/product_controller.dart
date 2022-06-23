@@ -1,4 +1,5 @@
 import 'package:ecommerce_admin_panel/models/prdouct.dart';
+import 'package:ecommerce_admin_panel/services/orders/repository_order.dart';
 import 'package:ecommerce_admin_panel/shared/remote/dio_helper.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -7,6 +8,8 @@ class ProductController extends ChangeNotifier {
   bool isloadingGetProduct = false;
   List<Product> list_of_product = [];
   List<Product> original_list_of_Product = [];
+
+  RepositoryOrder repositoryOrder = RepositoryOrder();
 
   Future<List<Product>> getallProduct() async {
     list_of_product = [];
@@ -74,5 +77,9 @@ class ProductController extends ChangeNotifier {
       });
       notifyListeners();
     });
+  }
+
+  Future<void> getAllorders() async {
+    await repositoryOrder.getorders();
   }
 }

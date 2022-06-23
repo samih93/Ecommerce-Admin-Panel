@@ -35,7 +35,7 @@ class DioHelper {
     dio!.options.headers = {
       //'Authorization': 'key=$API_FCM_KEY',
       'Content-Type': 'application/json',
-      "Access-Control-Allow-Origin": "*",
+      // "Access-Control-Allow-Origin": "*",
     };
 
     return dio!.post(
