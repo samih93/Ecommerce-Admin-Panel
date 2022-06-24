@@ -9,7 +9,6 @@ class ProductController extends ChangeNotifier {
   List<Product> list_of_product = [];
   List<Product> original_list_of_Product = [];
 
-  RepositoryOrder repositoryOrder = RepositoryOrder();
 
   Future<List<Product>> getallProduct() async {
     list_of_product = [];
@@ -79,7 +78,5 @@ class ProductController extends ChangeNotifier {
     });
   }
 
-  Future<void> getAllorders() async {
-    await repositoryOrder.getorders();
-  }
+  
 }

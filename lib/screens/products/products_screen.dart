@@ -24,7 +24,7 @@ class _ProductScreenState extends State<ProductScreen> {
   }
 
   Future<void> getProductData() async {
-    context.read<ProductController>()..getAllorders();
+    //context.read<ProductController>()..getAllorders();
   }
 
   // final DataGridController _dataGridController = DataGridController();

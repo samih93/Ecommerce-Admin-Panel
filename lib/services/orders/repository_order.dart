@@ -11,6 +11,11 @@ class RepositoryOrder implements IrepositoryOrder {
     List<Order> _orders = [];
     await databasereference.collection('orders').get().then((value) {
       print("order lenght " + value.docs.length.toString());
+      if (value.docs.length > 0) {
+        value.docs.forEach((element) {
+          _orders.add(Order.fromJson(element.data()));
+        });
+      }
     });
 
     return _orders;

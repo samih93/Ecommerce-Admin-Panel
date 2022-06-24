@@ -1,5 +1,6 @@
 import 'package:ecommerce_admin_panel/controllers/MenuController.dart';
 import 'package:ecommerce_admin_panel/controllers/auth_controller.dart';
+import 'package:ecommerce_admin_panel/controllers/dashboard_controller.dart';
 import 'package:ecommerce_admin_panel/models/menu_model.dart';
 import 'package:ecommerce_admin_panel/shared/constants.dart';
 import 'package:ecommerce_admin_panel/shared/responsive.dart';
@@ -68,6 +69,9 @@ class DrawerListTile extends StatelessWidget {
                     context.read<MenuController>()..buildMenu();
                   });
               }
+              // if (i == 0) {
+              //   context.read<DashBoardController>()..getAllorders();
+              // }
             },
             horizontalTitleGap: 0.0,
             leading: SvgPicture.asset(

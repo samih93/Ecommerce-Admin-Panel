@@ -65,15 +65,15 @@ class MenuController extends ChangeNotifier {
   var screens_title = [];
   var screens = [];
   void buildMenu() {
-    if (_authProvider != null && _authProvider!.currentuserModel == null) {
-      screens_title = _offline_screens_title;
-      menuModelList = _offline_menuModelList;
-      screens = _offline_screen;
-    } else {
-      screens_title = _screens_title;
-      menuModelList = _menuModelList;
-      screens = _screens;
-    }
+    // if (_authProvider != null && _authProvider!.currentuserModel == null) {
+    //   screens_title = _offline_screens_title;
+    //   menuModelList = _offline_menuModelList;
+    //   screens = _offline_screen;
+    // } else {
+    screens_title = _screens_title;
+    menuModelList = _menuModelList;
+    screens = _screens;
+    //   }
     notifyListeners();
   }
 

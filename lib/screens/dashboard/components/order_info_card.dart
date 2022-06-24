@@ -1,16 +1,17 @@
 import 'package:ecommerce_admin_panel/models/MyFiles.dart';
+import 'package:ecommerce_admin_panel/models/ordermodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../shared/constants.dart';
 
-class FileInfoCard extends StatelessWidget {
-  const FileInfoCard({
+class OrderInfoCard extends StatelessWidget {
+  const OrderInfoCard({
     Key? key,
-    required this.info,
+    required this.order,
   }) : super(key: key);
 
-  final CloudStorageInfo info;
+  final OrderInfo order;
 
   @override
   Widget build(BuildContext context) {
@@ -32,43 +33,43 @@ class FileInfoCard extends StatelessWidget {
                 height: 40,
                 width: 40,
                 decoration: BoxDecoration(
-                  color: info.color!.withOpacity(0.1),
+                  color: order.color!.withOpacity(0.1),
                   borderRadius: const BorderRadius.all(Radius.circular(10)),
                 ),
                 child: SvgPicture.asset(
-                  info.svgSrc!,
-                  color: info.color,
+                  'assets/icons/Documents.svg',
+                  color: order.color!,
                 ),
               ),
               Icon(Icons.more_vert, color: Colors.white54)
             ],
           ),
           Text(
-            info.title!,
+            order.title!,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
-          ProgressLine(
-            color: info.color,
-            percentage: info.percentage,
-          ),
+          // ProgressLine(
+          //   color: order.color,
+          //   percentage: info.percentage,
+          // ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "${info.numOfFiles} Files",
+                "${order.numOfFiles} Orders",
                 style: Theme.of(context)
                     .textTheme
                     .caption!
                     .copyWith(color: Colors.white70),
               ),
-              Text(
-                info.totalStorage!,
-                style: Theme.of(context)
-                    .textTheme
-                    .caption!
-                    .copyWith(color: Colors.white),
-              ),
+              // Text(
+              //   order.totalStorage!,
+              //   style: Theme.of(context)
+              //       .textTheme
+              //       .caption!
+              //       .copyWith(color: Colors.white),
+              // ),
             ],
           )
         ],

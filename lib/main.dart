@@ -1,5 +1,6 @@
 import 'package:ecommerce_admin_panel/controllers/MenuController.dart';
 import 'package:ecommerce_admin_panel/controllers/auth_controller.dart';
+import 'package:ecommerce_admin_panel/controllers/dashboard_controller.dart';
 import 'package:ecommerce_admin_panel/controllers/product_controller.dart';
 import 'package:ecommerce_admin_panel/screens/main/main_screen.dart';
 import 'package:ecommerce_admin_panel/shared/constants.dart';
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Admin Panel',
+      title: 'Ecommerce Admin Panel',
       theme: ThemeData.dark().copyWith(
         scaffoldBackgroundColor: bgColor,
         textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme)
@@ -49,7 +50,10 @@ class MyApp extends StatelessWidget {
             create: (BuildContext context) => MenuController(null),
           ),
           ChangeNotifierProvider(
-            create: (context) => ProductController()..getAllorders(),
+            create: (context) => DashBoardController()..getAllorders(),
+          ),
+          ChangeNotifierProvider(
+            create: (context) => ProductController(),
           ),
         ],
         child: MainScreen(),
