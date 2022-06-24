@@ -5,13 +5,14 @@ class OrderInfo {
   final String? svgSrc, title;
   final int? numOfFiles;
   final Color? color;
+  final int? percentage;
 
   OrderInfo({
     this.svgSrc,
     this.title,
     // this.totalStorage,
     this.numOfFiles,
-    //this.percentage,
+    this.percentage,
     this.color,
   });
 }

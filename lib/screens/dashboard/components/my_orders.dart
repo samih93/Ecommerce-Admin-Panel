@@ -41,7 +41,7 @@ class MyOrders extends StatelessWidget {
         SizedBox(height: defaultPadding),
         Responsive(
           mobile: OrderInfoCardGridView(
-            crossAxisCount: _size.width < 650 ? 2 : 4,
+            crossAxisCount: _size.width < 650 ? 2 : 3,
             childAspectRatio: _size.width < 650 && _size.width > 350 ? 1.3 : 1,
           ),
           tablet: OrderInfoCardGridView(),

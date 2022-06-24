@@ -46,22 +46,32 @@ class OrderInfoCard extends StatelessWidget {
           ),
           Text(
             order.title!,
+            style: TextStyle(fontSize: 20),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
-          // ProgressLine(
-          //   color: order.color,
-          //   percentage: info.percentage,
-          // ),
+          if(order.title!="All Orders")
+          ProgressLine(
+            color: order.color,
+            percentage: order.percentage!,
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                "${order.numOfFiles} Orders",
-                style: Theme.of(context)
-                    .textTheme
-                    .caption!
-                    .copyWith(color: Colors.white70),
+              Container(
+                padding: EdgeInsets.all(defaultPadding * 0.75),
+                height: 50,
+                width: 50,
+                decoration: BoxDecoration(
+                  color: order.color!.withOpacity(0.1),
+                  borderRadius: const BorderRadius.all(Radius.circular(10)),
+                ),
+                child: Center(
+                  child: Text(
+                    order.numOfFiles.toString(),
+                    style: TextStyle(color: order.color!, fontSize: 20),
+                  ),
+                ),
               ),
               // Text(
               //   order.totalStorage!,

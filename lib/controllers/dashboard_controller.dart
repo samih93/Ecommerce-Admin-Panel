@@ -18,6 +18,10 @@ class DashBoardController extends ChangeNotifier {
       allOrders.where((element) => element.status == "Completed").length;
 
   List demoMyOrder = [];
+  int get pendingpercentage =>
+      int.parse((pendingOrderCount / allOrders.length * 100).toString());
+  int get completedpercentage =>
+      int.parse((completedOrderCount / allOrders.length * 100).toString());
 
   Future<void> getAllorders() async {
     isloadingGetAllProduct = true;
@@ -29,7 +33,7 @@ class DashBoardController extends ChangeNotifier {
 
 //   all orders cart
     demoMyOrder.add(OrderInfo(
-      title: "Orders",
+      title: "All Orders",
       numOfFiles: allOrders.length,
       svgSrc: "assets/icons/Documents.svg",
       color: primaryColor,
@@ -40,6 +44,7 @@ class DashBoardController extends ChangeNotifier {
       title: "Pending",
       numOfFiles: pendingOrderCount,
       svgSrc: "assets/icons/Documents.svg",
+      percentage: pendingpercentage,
       color: Colors.red.shade500,
     ));
 
@@ -48,6 +53,7 @@ class DashBoardController extends ChangeNotifier {
       title: "Completed",
       numOfFiles: completedOrderCount,
       svgSrc: "assets/icons/Documents.svg",
+      percentage: completedpercentage,
       color: Colors.green.shade500,
     ));
 

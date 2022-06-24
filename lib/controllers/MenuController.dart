@@ -3,6 +3,7 @@ import 'package:ecommerce_admin_panel/models/UserModel.dart';
 import 'package:ecommerce_admin_panel/models/menu_model.dart';
 import 'package:ecommerce_admin_panel/screens/dashboard/dashboard_screen.dart';
 import 'package:ecommerce_admin_panel/screens/login/login_screen.dart';
+import 'package:ecommerce_admin_panel/screens/orders/orders_screen.dart';
 import 'package:ecommerce_admin_panel/screens/products/products_screen.dart';
 import 'package:ecommerce_admin_panel/shared/constants.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +23,7 @@ class MenuController extends ChangeNotifier {
 
   final _screens = [
     DashboardScreen(),
-    ProductScreen(),
+    OrdersScreen(),
     ProductScreen(),
     ProductScreen(),
     ProductScreen(),
@@ -35,7 +36,7 @@ class MenuController extends ChangeNotifier {
   final _offline_screens_title = ['Login'];
   final _screens_title = [
     'Dashboard',
-    'Transaction',
+    'Orders',
     'Products',
     'Documents',
     'Store',
@@ -51,7 +52,7 @@ class MenuController extends ChangeNotifier {
 
   List<MenuModel> _menuModelList = [
     MenuModel("Dashboard", "assets/icons/menu_dashbord.svg", isselected: true),
-    MenuModel("Transaction", "assets/icons/menu_tran.svg"),
+    MenuModel("Orders", "assets/icons/menu_tran.svg"),
     MenuModel("Products", "assets/icons/menu_task.svg"),
     MenuModel("Documents", "assets/icons/menu_doc.svg"),
     MenuModel("Store", "assets/icons/menu_store.svg"),
@@ -65,15 +66,15 @@ class MenuController extends ChangeNotifier {
   var screens_title = [];
   var screens = [];
   void buildMenu() {
-    // if (_authProvider != null && _authProvider!.currentuserModel == null) {
-    //   screens_title = _offline_screens_title;
-    //   menuModelList = _offline_menuModelList;
-    //   screens = _offline_screen;
-    // } else {
-    screens_title = _screens_title;
-    menuModelList = _menuModelList;
-    screens = _screens;
-    //   }
+    if (_authProvider != null && _authProvider!.currentuserModel == null) {
+      screens_title = _offline_screens_title;
+      menuModelList = _offline_menuModelList;
+      screens = _offline_screen;
+    } else {
+      screens_title = _screens_title;
+      menuModelList = _menuModelList;
+      screens = _screens;
+    }
     notifyListeners();
   }
 
