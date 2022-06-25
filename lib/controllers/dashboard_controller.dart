@@ -19,9 +19,9 @@ class DashBoardController extends ChangeNotifier {
 
   List demoMyOrder = [];
   int get pendingpercentage =>
-      int.parse((pendingOrderCount / allOrders.length * 100).toString());
+      (pendingOrderCount / allOrders.length * 100).toInt();
   int get completedpercentage =>
-      int.parse((completedOrderCount / allOrders.length * 100).toString());
+      (completedOrderCount / allOrders.length * 100).toInt();
 
   Future<void> getAllorders() async {
     isloadingGetAllProduct = true;
