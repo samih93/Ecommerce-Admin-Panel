@@ -1,6 +1,7 @@
 import 'package:ecommerce_admin_panel/controllers/MenuController.dart';
 import 'package:ecommerce_admin_panel/controllers/auth_controller.dart';
 import 'package:ecommerce_admin_panel/controllers/dashboard_controller.dart';
+import 'package:ecommerce_admin_panel/controllers/orders_controller.dart';
 import 'package:ecommerce_admin_panel/controllers/product_controller.dart';
 import 'package:ecommerce_admin_panel/screens/main/main_screen.dart';
 import 'package:ecommerce_admin_panel/shared/constants.dart';
@@ -50,7 +51,7 @@ class MyApp extends StatelessWidget {
             create: (BuildContext context) => MenuController(null),
           ),
           ChangeNotifierProvider(
-            create: (context) => DashBoardController()..getAllorders(),
+            create: (context) => OrdersController()..getAllorders(),
           ),
           ChangeNotifierProvider(
             create: (context) => ProductController(),

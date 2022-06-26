@@ -1,5 +1,6 @@
 import 'package:ecommerce_admin_panel/controllers/MenuController.dart';
 import 'package:ecommerce_admin_panel/controllers/auth_controller.dart';
+import 'package:ecommerce_admin_panel/controllers/orders_controller.dart';
 import 'package:ecommerce_admin_panel/controllers/product_controller.dart';
 import 'package:ecommerce_admin_panel/shared/responsive.dart';
 import 'package:flutter/material.dart';
@@ -90,7 +91,6 @@ class SearchField extends StatelessWidget {
     return TextField(
       onChanged: (value) {
         if (context.read<MenuController>().currentSelectedIndex == 1) {
-          // context.read<StudentController>().searchStudent(value.trim());
         } else if (context.read<MenuController>().currentSelectedIndex == 2) {
           context.read<ProductController>().searchproduct(
               value.trim().length > 2 ? value.trim().toString() : '');

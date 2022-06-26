@@ -1,18 +1,19 @@
 import 'package:ecommerce_admin_panel/controllers/dashboard_controller.dart';
+import 'package:ecommerce_admin_panel/controllers/orders_controller.dart';
 import 'package:ecommerce_admin_panel/screens/dashboard/components/my_orders.dart';
+import 'package:ecommerce_admin_panel/screens/dashboard/components/recent_files.dart';
 import 'package:ecommerce_admin_panel/shared/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../shared/constants.dart';
-import 'components/header.dart';
 
 import 'components/storage_details.dart';
 
 class DashboardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return context.watch<DashBoardController>().isloadingGetAllProduct
+    return context.watch<OrdersController>().isloadingGetAllProduct
         ? CircularProgressIndicator()
         : Column(
             children: [
@@ -25,7 +26,7 @@ class DashboardScreen extends StatelessWidget {
                       children: [
                         MyOrders(),
                         SizedBox(height: defaultPadding),
-                        // RecentFiles(),
+                        //RecentFiles(),
                         if (Responsive.isMobile(context))
                           SizedBox(height: defaultPadding),
                         if (Responsive.isMobile(context)) StarageDetails(),
