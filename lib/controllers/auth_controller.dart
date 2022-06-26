@@ -40,6 +40,12 @@ class AuthController extends ChangeNotifier {
     return currentuserModel;
   }
 
+  bool showpassword = false;
+  onchangepasswordvisibility() {
+    showpassword = !showpassword;
+    notifyListeners();
+  }
+
   Future SignOut() async {
     await FirebaseAuth.instance.signOut();
     currentuserModel = null;

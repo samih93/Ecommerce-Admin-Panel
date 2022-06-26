@@ -25,7 +25,21 @@ Future<void> main() async {
   await DioHelper.init();
   //DesktopWindow.setMinWindowSize(Size(1300, 800));
 
-  runApp(MyApp());
+  runApp(MultiProvider(providers: [
+    ChangeNotifierProvider(
+      create: (context) => AuthController(),
+    ),
+    ChangeNotifierProxyProvider<AuthController, MenuController>(
+      update: (context, auth, previousMenu) => MenuController(auth),
+      create: (BuildContext context) => MenuController(null),
+    ),
+    ChangeNotifierProvider(
+      create: (context) => OrdersController()..getAllorders(),
+    ),
+    ChangeNotifierProvider(
+      create: (context) => ProductController(),
+    ),
+  ], child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -41,24 +55,7 @@ class MyApp extends StatelessWidget {
             .apply(bodyColor: Colors.white),
         canvasColor: secondaryColor,
       ),
-      home: MultiProvider(
-        providers: [
-          ChangeNotifierProvider(
-            create: (context) => AuthController(),
-          ),
-          ChangeNotifierProxyProvider<AuthController, MenuController>(
-            update: (context, auth, previousMessages) => MenuController(auth),
-            create: (BuildContext context) => MenuController(null),
-          ),
-          ChangeNotifierProvider(
-            create: (context) => OrdersController()..getAllorders(),
-          ),
-          ChangeNotifierProvider(
-            create: (context) => ProductController(),
-          ),
-        ],
-        child: MainScreen(),
-      ),
+      home: MainScreen(),
     );
   }
 }

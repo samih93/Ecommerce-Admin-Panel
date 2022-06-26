@@ -8,7 +8,6 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:provider/provider.dart';
 
 class LoginForm extends StatelessWidget {
-  LoginForm({Key? key}) : super(key: key);
   var text_emailcontroller = TextEditingController();
   var text_passwordcontroller = TextEditingController();
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
@@ -39,14 +38,28 @@ class LoginForm extends StatelessWidget {
           SizedBox(
             height: 10,
           ),
-          defaultTextFormField(
-            controller: text_passwordcontroller,
-            inputtype: TextInputType.visiblePassword,
-            hinttext: "Password",
-            onvalidate: (value) {
-              if (value!.isEmpty) return "password must not be empty";
-            },
-          ),
+          Consumer<AuthController>(builder: (context, authcontroller, child) {
+            return defaultTextFormField(
+              suffixIcon: InkWell(
+                child: Icon(
+                  authcontroller.showpassword
+                      ? Icons.visibility
+                      : Icons.visibility_off,
+                ),
+                onTap: () {
+                  authcontroller.onchangepasswordvisibility();
+                },
+              ),
+              obscure: authcontroller.showpassword,
+              controller: text_passwordcontroller,
+              inputtype: TextInputType.text,
+              hinttext: "Password",
+              onvalidate: (value) {
+                if (value!.isEmpty) return "password must not be empty";
+                return null;
+              },
+            );
+          }),
           SizedBox(
             height: 30,
           ),

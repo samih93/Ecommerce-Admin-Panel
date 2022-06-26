@@ -2,6 +2,8 @@ import 'package:data_table_2/data_table_2.dart';
 import 'package:ecommerce_admin_panel/controllers/dashboard_controller.dart';
 import 'package:ecommerce_admin_panel/controllers/orders_controller.dart';
 import 'package:ecommerce_admin_panel/models/ordermodel.dart';
+import 'package:ecommerce_admin_panel/screens/main/main_screen.dart';
+import 'package:ecommerce_admin_panel/screens/orders/view_order_screen.dart';
 import 'package:ecommerce_admin_panel/shared/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -42,13 +44,13 @@ class OrdersScreen extends StatelessWidget {
         rows: List.generate(
           context.read<OrdersController>().allOrders.length,
           (index) => recentOrderDataRow(
-              context.read<OrdersController>().allOrders[index]),
+              context.read<OrdersController>().allOrders[index], context),
         ),
       ),
     );
   }
 
-  DataRow recentOrderDataRow(Order order) {
+  DataRow recentOrderDataRow(Order order, BuildContext context) {
     return DataRow(
       cells: [
         DataCell(
@@ -76,7 +78,14 @@ class OrdersScreen extends StatelessWidget {
                 width: 8,
               ),
               MaterialButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ViewOrderScreen(order),
+                      ),
+                    );
+                  },
                   child: Text("View"),
                   color: Colors.blue.shade400),
             ],
