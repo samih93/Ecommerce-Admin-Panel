@@ -70,4 +70,31 @@ class OrdersController extends ChangeNotifier {
   // search_in_orders(String value) {
 
   // }
+
+  // NOTE onchage status order
+  OrderStatus orderStatus = OrderStatus.All;
+
+  void onchangeOrderStatus(OrderStatus o) {
+    allOrders = original_all_orders;
+
+    orderStatus = o;
+    switch (o) {
+      case OrderStatus.All:
+        allOrders = original_all_orders;
+
+        break;
+      case OrderStatus.Completed:
+        allOrders = allOrders
+            .where((element) => element.status == "Completed")
+            .toList();
+        break;
+      case OrderStatus.Pending:
+        allOrders =
+            allOrders.where((element) => element.status == "Pending").toList();
+        break;
+    }
+    notifyListeners();
+  }
 }
+
+enum OrderStatus { All, Completed, Pending }

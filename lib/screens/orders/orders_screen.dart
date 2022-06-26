@@ -16,37 +16,66 @@ class OrdersScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 400,
-      child: DataTable2(
-        columnSpacing: defaultPadding,
-        //minWidth: 600,
-        columns: [
-          DataColumn(
-            label: Text("Order Id"),
-          ),
-          DataColumn(
-            label: Text("Order Date"),
-          ),
-          DataColumn(
-            label: Text("Status"),
-          ),
-          DataColumn(
-            label: Text("Total Price"),
-          ),
-          // DataColumn(
-          //   label: Text("User Id"),
-          // ),
-          DataColumn(
-            label: Text(""),
-          ),
-        ],
-        rows: List.generate(
-          context.read<OrdersController>().allOrders.length,
-          (index) => recentOrderDataRow(
-              context.read<OrdersController>().allOrders[index], context),
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            DropdownButton<OrderStatus>(
+              value: context.watch<OrdersController>().orderStatus,
+              items: OrderStatus.values.map((OrderStatus orderstatus) {
+                return DropdownMenuItem<OrderStatus>(
+                  value: orderstatus,
+                  child: Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: defaultPadding),
+                    child: Text(orderstatus.name),
+                  ),
+                );
+              }).toList(),
+              onChanged: (value) {
+                print(value);
+                context.read<OrdersController>()..onchangeOrderStatus(value!);
+              },
+            ),
+          ],
         ),
-      ),
+        Container(
+          height: 400,
+          child: Consumer<OrdersController>(
+              builder: (context, ordercontorller, child) {
+            return DataTable2(
+              columnSpacing: defaultPadding,
+              //minWidth: 600,
+              columns: [
+                DataColumn(
+                  label: Text("Order Id"),
+                ),
+                DataColumn(
+                  label: Text("Order Date"),
+                ),
+                DataColumn(
+                  label: Text("Status"),
+                ),
+                DataColumn(
+                  label: Text("Total Price"),
+                ),
+                // DataColumn(
+                //   label: Text("User Id"),
+                // ),
+                DataColumn(
+                  label: Text(""),
+                ),
+              ],
+              rows: List.generate(
+                ordercontorller.allOrders.length,
+                (index) => recentOrderDataRow(
+                    ordercontorller.allOrders[index], context),
+              ),
+            );
+          }),
+        ),
+      ],
     );
   }
 
@@ -69,11 +98,13 @@ class OrdersScreen extends StatelessWidget {
         DataCell(Padding(
           padding: const EdgeInsets.all(8.0),
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              MaterialButton(
-                  onPressed: () {},
-                  child: Text("Edit"),
-                  color: Colors.red.shade400),
+              if (order.status != "Completed")
+                MaterialButton(
+                    onPressed: () {},
+                    child: Text("Completed"),
+                    color: Colors.green.shade400),
               SizedBox(
                 width: 8,
               ),
