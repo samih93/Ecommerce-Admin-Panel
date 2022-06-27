@@ -1,6 +1,7 @@
 import 'package:ecommerce_admin_panel/controllers/MenuController.dart';
 import 'package:ecommerce_admin_panel/controllers/auth_controller.dart';
 import 'package:ecommerce_admin_panel/controllers/dashboard_controller.dart';
+import 'package:ecommerce_admin_panel/controllers/product_controller.dart';
 import 'package:ecommerce_admin_panel/models/menu_model.dart';
 import 'package:ecommerce_admin_panel/shared/constants.dart';
 import 'package:ecommerce_admin_panel/shared/responsive.dart';
@@ -55,12 +56,13 @@ class DrawerListTile extends StatelessWidget {
           child: ListTile(
             selected: true,
             selectedColor: Colors.grey.shade400,
-            onTap: () {
+            onTap: () async {
               if (i != 8) {
                 context.read<MenuController>().onChangeSelectedMenu(i);
-                print(listOfModel[i].title.toString() +
-                    " - " +
-                    listOfModel[i].isselected.toString());
+                if (i == 2)
+                  await context.read<ProductController>()
+                    ..getallProduct();
+
                 if (Responsive.isMobile(context) ||
                     Responsive.isTablet(context)) Navigator.pop(context);
               } else {

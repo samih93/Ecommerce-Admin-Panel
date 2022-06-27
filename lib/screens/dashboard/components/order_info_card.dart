@@ -1,5 +1,7 @@
 import 'package:ecommerce_admin_panel/models/MyFiles.dart';
 import 'package:ecommerce_admin_panel/models/ordermodel.dart';
+import 'package:ecommerce_admin_panel/shared/responsive.dart';
+import 'package:ecommerce_admin_panel/shared/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -16,7 +18,13 @@ class OrderInfoCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(defaultPadding),
+      padding: EdgeInsets.all(
+          !Responsive.isMobile(context) || !Responsive.isTablet(context)
+              ? defaultPadding
+              : 5),
+      height: !Responsive.isMobile(context)
+          ? Utils.getscreensize(context).height * 0.2
+          : Utils.getscreensize(context).height * 0.3,
       decoration: BoxDecoration(
         color: secondaryColor,
         borderRadius: const BorderRadius.all(Radius.circular(10)),
@@ -46,7 +54,7 @@ class OrderInfoCard extends StatelessWidget {
           ),
           Text(
             order.title!,
-            style: TextStyle(fontSize: 20),
+            style: TextStyle(fontSize: Responsive.isMobile(context) ? 15 : 20),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
@@ -62,9 +70,10 @@ class OrderInfoCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                padding: EdgeInsets.all(defaultPadding * 0.75),
-                height: 60,
-                width: 50,
+                padding: EdgeInsets.all(
+                    !Responsive.isMobile(context) ? defaultPadding * 0.75 : 3),
+                height: !Responsive.isMobile(context) ? 60 : 30,
+                width: !Responsive.isMobile(context) ? 50 : 25,
                 decoration: BoxDecoration(
                   color: order.color!.withOpacity(0.1),
                   borderRadius: const BorderRadius.all(Radius.circular(10)),
@@ -72,7 +81,9 @@ class OrderInfoCard extends StatelessWidget {
                 child: Center(
                   child: Text(
                     order.numOfOrders.toString(),
-                    style: TextStyle(color: order.color!, fontSize: 22),
+                    style: TextStyle(
+                        color: order.color!,
+                        fontSize: !Responsive.isMobile(context) ? 22 : 18),
                   ),
                 ),
               ),

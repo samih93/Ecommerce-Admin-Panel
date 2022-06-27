@@ -1,5 +1,6 @@
 import 'package:ecommerce_admin_panel/screens/login/components/login_form.dart';
 import 'package:ecommerce_admin_panel/shared/constants.dart';
+import 'package:ecommerce_admin_panel/shared/responsive.dart';
 import 'package:ecommerce_admin_panel/shared/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
@@ -14,20 +15,18 @@ class LoginScreen extends StatelessWidget {
 
     return Container(
         color: secondaryColor,
-        height: _size.width > 1100
+        height: Responsive.isDesktop(context)
             ? _size.width * .4
-            : _size.width > 850
+            : Responsive.isTablet(context)
                 ? _size.width * .7
-                : _size.width * 0.7,
-        width: _size.width > 1100
+                : _size.width * 0.9,
+        width: Responsive.isDesktop(context)
             ? _size.width * .4
-            : _size.width > 850
+            : Responsive.isTablet(context)
                 ? _size.width * .7
-                : _size.width * 0.7,
-        padding: EdgeInsets.all(defaultPadding),
-        child: Padding(
-          padding: const EdgeInsets.all(30.0),
-          child: LoginForm(),
-        ));
+                : _size.width * 0.9,
+        padding:
+            EdgeInsets.all(!Responsive.isMobile(context) ? defaultPadding : 8),
+        child: LoginForm());
   }
 }
