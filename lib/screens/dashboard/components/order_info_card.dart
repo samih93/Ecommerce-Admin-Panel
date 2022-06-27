@@ -50,11 +50,11 @@ class OrderInfoCard extends StatelessWidget {
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
-          if(order.title!="All Orders")
-          ProgressLine(
-            color: order.color,
-            percentage: order.percentage!,
-          ),
+          if (order.title != "All Orders")
+            ProgressLine(
+              color: order.color,
+              percentage: order.percentage!,
+            ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

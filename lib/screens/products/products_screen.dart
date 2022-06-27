@@ -42,7 +42,7 @@ class _ProductScreenState extends State<ProductScreen> {
             children: [
               // Container(
               //   padding: EdgeInsets.all(3),
-              //   height: MediaQuery.of(context).size.height * .6,
+              //   height: Utils.getscreensize(context).height * .6,
               //   child: SfDataGrid(
               //     onQueryRowHeight: (details) {
               //       // Set the row height as 70.0 to the column header row.

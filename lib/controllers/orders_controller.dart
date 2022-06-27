@@ -30,7 +30,11 @@ class OrdersController extends ChangeNotifier {
     notifyListeners();
     allOrders = await repositoryOrder.getorders();
     allOrders.forEach((element) {
-      print(element.toJson());
+      if (element.status == "completed") element.list_of_status = ["view"];
+      if (element.status != "delivered" && element.status != "completed")
+        element.list_of_status = ["view", "delivered"];
+      if (element.status == "delivered")
+        element.list_of_status = ["view", "completed"];
     });
     original_all_orders = allOrders;
 
@@ -71,30 +75,61 @@ class OrdersController extends ChangeNotifier {
 
   // }
 
-  // NOTE onchage status order
-  OrderStatus orderStatus = OrderStatus.All;
+//NOTE on change status order
+  String orderStatus = "view";
+  bool isloadingupdate_orderStatus = false;
 
-  void onchangeOrderStatus(OrderStatus o) {
+  Future<void> onchangeOrderStatus(String orderId, String statusvalue) async {
+    orderStatus = statusvalue;
+    isloadingupdate_orderStatus = true;
+    notifyListeners();
+    await repositoryOrder.updateOrderStatus(orderId, statusvalue).then((value) {
+      allOrders.forEach((element) {
+        if (element.orderId == orderId) {
+          element.status = orderStatus;
+          if (statusvalue == "completed") element.list_of_status = ["view"];
+          if (statusvalue != "delivered" && statusvalue != "completed")
+            element.list_of_status = ["view", "delivered"];
+          if (statusvalue == "delivered")
+            element.list_of_status = ["view", "completed"];
+        }
+      });
+      isloadingupdate_orderStatus = false;
+      notifyListeners();
+    });
+  }
+
+  // NOTE onchage table view
+  OrderStatus table_orderStatus = OrderStatus.all;
+
+  void onchangeTableOrderStatus(OrderStatus o) {
     allOrders = original_all_orders;
 
-    orderStatus = o;
+    table_orderStatus = o;
     switch (o) {
-      case OrderStatus.All:
+      case OrderStatus.all:
         allOrders = original_all_orders;
 
         break;
-      case OrderStatus.Completed:
+      case OrderStatus.packaging:
         allOrders = allOrders
-            .where((element) => element.status == "Completed")
+            .where((element) => element.status == "packaging")
             .toList();
         break;
-      case OrderStatus.Pending:
-        allOrders =
-            allOrders.where((element) => element.status == "Pending").toList();
+      case OrderStatus.completed:
+        allOrders = allOrders
+            .where((element) => element.status == "completed")
+            .toList();
+        break;
+
+      case OrderStatus.delivered:
+        allOrders = allOrders
+            .where((element) => element.status == "delivered")
+            .toList();
         break;
     }
     notifyListeners();
   }
 }
 
-enum OrderStatus { All, Completed, Pending }
+enum OrderStatus { all, packaging, completed, delivered }

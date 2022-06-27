@@ -1,3 +1,4 @@
+import 'package:ecommerce_admin_panel/shared/utils.dart';
 import 'package:flutter/material.dart';
 
 class Responsive extends StatelessWidget {
@@ -16,18 +17,18 @@ class Responsive extends StatelessWidget {
 
   // This isMobile, isTablet, isDesktop helep us later
   static bool isMobile(BuildContext context) =>
-      MediaQuery.of(context).size.width < 850;
+      Utils.getscreensize(context).width < 850;
 
   static bool isTablet(BuildContext context) =>
-      MediaQuery.of(context).size.width < 1100 &&
-      MediaQuery.of(context).size.width >= 850;
+      Utils.getscreensize(context).width < 1100 &&
+      Utils.getscreensize(context).width >= 850;
 
   static bool isDesktop(BuildContext context) =>
-      MediaQuery.of(context).size.width >= 1100;
+      Utils.getscreensize(context).width >= 1100;
 
   @override
   Widget build(BuildContext context) {
-    final Size _size = MediaQuery.of(context).size;
+    final Size _size = Utils.getscreensize(context);
     // If our width is more than 1100 then we consider it a desktop
     if (_size.width >= 1100) {
       return desktop;

@@ -12,6 +12,7 @@ class Order {
   Address? shippingAddress; // Address
   UserModel? personelInformation; // userModel
   List<CartProduct>? orderItems;
+  List<String>? list_of_status;
 
   Order(
       {this.totalprice,

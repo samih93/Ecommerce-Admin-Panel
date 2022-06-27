@@ -7,7 +7,6 @@ class RepositoryOrder implements IrepositoryOrder {
 
   @override
   Future<List<Order>> getorders() async {
-    // TODO: implement getorders
     List<Order> _orders = [];
     await databasereference.collection('orders').get().then((value) {
       print("order lenght " + value.docs.length.toString());
@@ -19,5 +18,24 @@ class RepositoryOrder implements IrepositoryOrder {
     });
 
     return _orders;
+  }
+
+  @override
+  Future<void> updateOrderStatus(String orderId, String statusvalue) async {
+    await databasereference
+        .collection('orders')
+        .where('orderId', isEqualTo: orderId)
+        .get()
+        .then((value) async {
+      if (value.docs.length > 0) {
+        String docId = value.docs.first.id;
+        await databasereference
+            .collection('orders')
+            .doc(docId)
+            .update({'status': statusvalue});
+      }
+      //Order order = Order.fromJson(value.docs.first.data());
+      // print(order.toJson());
+    });
   }
 }
