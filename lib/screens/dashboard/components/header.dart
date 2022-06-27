@@ -31,7 +31,7 @@ class Header extends StatelessWidget {
           ),
         if (!Responsive.isMobile(context))
           Spacer(flex: Responsive.isDesktop(context) ? 2 : 1),
-       // Expanded(flex: 2, child: SearchField()),
+        // Expanded(flex: 2, child: SearchField()),
         ProfileCard()
       ],
     );
@@ -56,24 +56,23 @@ class ProfileCard extends StatelessWidget {
         borderRadius: const BorderRadius.all(Radius.circular(10)),
         border: Border.all(color: Colors.white10),
       ),
-      child: Row(
-        children: [
-          Image.asset(
-            "assets/images/profile_pic.JPG",
-            height: 38,
-          ),
-          if (!Responsive.isMobile(context))
-            Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: defaultPadding / 2),
-              child: Consumer<AuthController>(
-                builder: (context, controller, child) {
-                  return Text(controller.currentuserModel!.email.toString());
-                },
+      child: Consumer<AuthController>(
+        builder: (context, controller, child) {
+          return Row(
+            children: [
+              Image.asset(
+                "assets/images/profile_pic.JPG",
+                height: 38,
               ),
-            ),
-          Icon(Icons.keyboard_arrow_down),
-        ],
+              if (!Responsive.isMobile(context))
+                Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: defaultPadding / 2),
+                    child: Text(controller.currentuserModel!.email.toString())),
+              Icon(Icons.keyboard_arrow_down),
+            ],
+          );
+        },
       ),
     );
   }

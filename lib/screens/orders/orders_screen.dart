@@ -101,8 +101,8 @@ class OrdersScreen extends StatelessWidget {
               color: order.status.toString() == "completed"
                   ? Colors.green.shade400
                   : order.status.toString() == "delivered"
-                      ? Colors.blue.shade400
-                      : Colors.red.shade400),
+                      ? Colors.lightBlueAccent.shade200
+                      : Colors.yellow.shade400),
         )),
         DataCell(Text(order.totalprice.toString() + " \$")),
         //DataCell(Text(order.uId.toString())),

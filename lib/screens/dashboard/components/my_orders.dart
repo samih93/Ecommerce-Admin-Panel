@@ -43,7 +43,11 @@ class MyOrders extends StatelessWidget {
         SizedBox(height: defaultPadding),
         Responsive(
           mobile: OrderInfoCardGridView(
-            crossAxisCount: _size.width < 650 ? 2 : 3,
+            crossAxisCount: _size.width < 650
+                ? 2
+                : _size.width < 850
+                    ? 3
+                    : 4,
             childAspectRatio: _size.width < 650 && _size.width > 350 ? 1.3 : 1,
           ),
           tablet: OrderInfoCardGridView(),
@@ -59,7 +63,7 @@ class MyOrders extends StatelessWidget {
 class OrderInfoCardGridView extends StatelessWidget {
   const OrderInfoCardGridView({
     Key? key,
-    this.crossAxisCount = 3,
+    this.crossAxisCount = 4,
     this.childAspectRatio = 1,
   }) : super(key: key);
 
@@ -71,7 +75,7 @@ class OrderInfoCardGridView extends StatelessWidget {
     return GridView.builder(
       physics: NeverScrollableScrollPhysics(),
       shrinkWrap: true,
-      itemCount: 3,
+      itemCount: 4,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: crossAxisCount,
         crossAxisSpacing: defaultPadding,

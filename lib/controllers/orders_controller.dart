@@ -11,22 +11,35 @@ class OrdersController extends ChangeNotifier {
   List<Order> allOrders = [];
   bool isloadingGetAllProduct = false;
 
-  int get pendingOrderCount =>
-      allOrders.where((element) => element.status == "Pending").length;
+// NOTE packaging
+  int get packagingOrderCount =>
+      allOrders.where((element) => element.status == "packaging").length;
+
+  int get packagingpercentage =>
+      (packagingOrderCount / allOrders.length * 100).toInt();
+
+// NOTE delivered
+
+  int get deliveredOrderCount =>
+      allOrders.where((element) => element.status == "delivered").length;
+
+  int get deliveredpercentage =>
+      (deliveredOrderCount / allOrders.length * 100).toInt();
+
+// NOTE completed
 
   int get completedOrderCount =>
-      allOrders.where((element) => element.status == "Completed").length;
+      allOrders.where((element) => element.status == "completed").length;
 
-  List demoMyOrder = [];
-  int get pendingpercentage =>
-      (pendingOrderCount / allOrders.length * 100).toInt();
   int get completedpercentage =>
       (completedOrderCount / allOrders.length * 100).toInt();
 
   List<Order> original_all_orders = [];
+  List demoMyOrder = [];
 
   Future<void> getAllorders() async {
     isloadingGetAllProduct = true;
+    demoMyOrder = [];
     notifyListeners();
     allOrders = await repositoryOrder.getorders();
     allOrders.forEach((element) {
@@ -41,24 +54,32 @@ class OrdersController extends ChangeNotifier {
 //   all orders cart
     demoMyOrder.add(OrderInfo(
       title: "All Orders",
-      numOfFiles: allOrders.length,
+      numOfOrders: allOrders.length,
       svgSrc: "assets/icons/Documents.svg",
-      color: primaryColor,
+      color: Colors.teal.shade300,
     ));
 
     //  pending orders cart
     demoMyOrder.add(OrderInfo(
-      title: "Pending",
-      numOfFiles: pendingOrderCount,
+      title: "Packaging",
+      numOfOrders: packagingOrderCount,
       svgSrc: "assets/icons/Documents.svg",
-      percentage: pendingpercentage,
-      color: Colors.red.shade500,
+      percentage: packagingpercentage,
+      color: Colors.yellow.shade500,
     ));
 
+    //  pending orders cart
+    demoMyOrder.add(OrderInfo(
+      title: "Delivered",
+      numOfOrders: deliveredOrderCount,
+      svgSrc: "assets/icons/Documents.svg",
+      percentage: deliveredpercentage,
+      color: Colors.lightBlueAccent.shade200,
+    ));
     //  pending orders cart
     demoMyOrder.add(OrderInfo(
       title: "Completed",
-      numOfFiles: completedOrderCount,
+      numOfOrders: completedOrderCount,
       svgSrc: "assets/icons/Documents.svg",
       percentage: completedpercentage,
       color: Colors.green.shade500,
@@ -95,6 +116,7 @@ class OrdersController extends ChangeNotifier {
         }
       });
       isloadingupdate_orderStatus = false;
+      getAllorders();
       notifyListeners();
     });
   }
