@@ -2,6 +2,7 @@ import 'package:ecommerce_admin_panel/controllers/dashboard_controller.dart';
 import 'package:ecommerce_admin_panel/controllers/orders_controller.dart';
 import 'package:ecommerce_admin_panel/models/MyFiles.dart';
 import 'package:ecommerce_admin_panel/shared/responsive.dart';
+import 'package:ecommerce_admin_panel/shared/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -15,7 +16,7 @@ class MyOrders extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Size _size = MediaQuery.of(context).size;
+    final Size _size = Utils.getscreensize(context);
     return Column(
       children: [
         Row(
@@ -42,7 +43,11 @@ class MyOrders extends StatelessWidget {
         SizedBox(height: defaultPadding),
         Responsive(
           mobile: OrderInfoCardGridView(
-            crossAxisCount: _size.width < 650 ? 2 : 3,
+            crossAxisCount: _size.width < 650
+                ? 2
+                : _size.width < 850
+                    ? 3
+                    : 4,
             childAspectRatio: _size.width < 650 && _size.width > 350 ? 1.3 : 1,
           ),
           tablet: OrderInfoCardGridView(),
@@ -58,7 +63,7 @@ class MyOrders extends StatelessWidget {
 class OrderInfoCardGridView extends StatelessWidget {
   const OrderInfoCardGridView({
     Key? key,
-    this.crossAxisCount = 3,
+    this.crossAxisCount = 4,
     this.childAspectRatio = 1,
   }) : super(key: key);
 
@@ -70,7 +75,7 @@ class OrderInfoCardGridView extends StatelessWidget {
     return GridView.builder(
       physics: NeverScrollableScrollPhysics(),
       shrinkWrap: true,
-      itemCount: 3,
+      itemCount: 4,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: crossAxisCount,
         crossAxisSpacing: defaultPadding,

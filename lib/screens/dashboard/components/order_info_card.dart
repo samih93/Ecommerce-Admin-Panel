@@ -50,17 +50,20 @@ class OrderInfoCard extends StatelessWidget {
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
-          if(order.title!="All Orders")
-          ProgressLine(
-            color: order.color,
-            percentage: order.percentage!,
+          if (order.title != "All Orders")
+            ProgressLine(
+              color: order.color,
+              percentage: order.percentage!,
+            ),
+          SizedBox(
+            height: 5,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
                 padding: EdgeInsets.all(defaultPadding * 0.75),
-                height: 50,
+                height: 60,
                 width: 50,
                 decoration: BoxDecoration(
                   color: order.color!.withOpacity(0.1),
@@ -68,8 +71,8 @@ class OrderInfoCard extends StatelessWidget {
                 ),
                 child: Center(
                   child: Text(
-                    order.numOfFiles.toString(),
-                    style: TextStyle(color: order.color!, fontSize: 20),
+                    order.numOfOrders.toString(),
+                    style: TextStyle(color: order.color!, fontSize: 22),
                   ),
                 ),
               ),

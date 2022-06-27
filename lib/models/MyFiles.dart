@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class OrderInfo {
   final String? svgSrc, title;
-  final int? numOfFiles;
+  final int? numOfOrders;
   final Color? color;
   final int? percentage;
 
@@ -11,7 +11,7 @@ class OrderInfo {
     this.svgSrc,
     this.title,
     // this.totalStorage,
-    this.numOfFiles,
+    this.numOfOrders,
     this.percentage,
     this.color,
   });
