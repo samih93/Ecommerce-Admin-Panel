@@ -37,13 +37,28 @@ class ProductItem extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Flexible(
-                        child: Image.network(
-                          '${product.images?.first.toString()}',
-                          fit: BoxFit.fill,
-                        ),
+                      Expanded(
+                        child: Container(
+                          height: Responsive.isDesktop(context)
+                              ? size.width * 0.14
+                              : size.width * 0.28,
+                          clipBehavior: Clip.none,
+                          decoration: BoxDecoration(
+                            color: const Color(0xff7c94b6),
+                            borderRadius: BorderRadius.circular(12),
+                            image: DecorationImage(
+                              fit: BoxFit.fill,
+                              colorFilter: ColorFilter.mode(
+                                  Colors.black.withOpacity(0.5),
+                                  BlendMode.dstATop),
+                              image: NetworkImage(
+                                '${product.images?.first}',
 
-                        // width: screenWidth * 0.12,
+                                // width: screenWidth * 0.12,
+                              ),
+                            ),
+                          ),
+                        ),
                       ),
                     ],
                   ),
