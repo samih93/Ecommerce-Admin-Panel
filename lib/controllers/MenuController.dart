@@ -11,13 +11,13 @@ import 'package:flutter/material.dart';
 class MenuController extends ChangeNotifier {
   final AuthController? _authProvider;
 
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> getscaffoldKey = GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> getviewOrderscaffoldKey =
+      GlobalKey<ScaffoldState>();
 
   MenuController(this._authProvider) {
     buildMenu();
   }
-
-  GlobalKey<ScaffoldState> get scaffoldKey => _scaffoldKey;
 
   final _offline_screen = [LoginScreen()];
 
@@ -78,9 +78,15 @@ class MenuController extends ChangeNotifier {
     notifyListeners();
   }
 
-  void controlMenu() {
-    if (!_scaffoldKey.currentState!.isDrawerOpen) {
-      _scaffoldKey.currentState!.openDrawer();
+  void main_controlMenu() {
+    if (!getscaffoldKey.currentState!.isDrawerOpen) {
+      getscaffoldKey.currentState!.openDrawer();
+    }
+  }
+
+  void viewOrder_controlMenu() {
+    if (!getviewOrderscaffoldKey.currentState!.isDrawerOpen) {
+      getviewOrderscaffoldKey.currentState!.openDrawer();
     }
   }
 

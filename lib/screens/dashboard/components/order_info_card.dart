@@ -52,11 +52,13 @@ class OrderInfoCard extends StatelessWidget {
               Icon(Icons.more_vert, color: Colors.white54)
             ],
           ),
-          Text(
-            order.title!,
-            style: TextStyle(fontSize: Responsive.isMobile(context) ? 15 : 20),
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
+          FittedBox(
+            child: Text(
+              order.title!,
+              style: TextStyle(fontSize:  20),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
           ),
           if (order.title != "All Orders")
             ProgressLine(

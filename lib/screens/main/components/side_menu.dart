@@ -3,6 +3,7 @@ import 'package:ecommerce_admin_panel/controllers/auth_controller.dart';
 import 'package:ecommerce_admin_panel/controllers/dashboard_controller.dart';
 import 'package:ecommerce_admin_panel/controllers/product_controller.dart';
 import 'package:ecommerce_admin_panel/models/menu_model.dart';
+import 'package:ecommerce_admin_panel/screens/dashboard/dashboard_screen.dart';
 import 'package:ecommerce_admin_panel/shared/constants.dart';
 import 'package:ecommerce_admin_panel/shared/responsive.dart';
 import 'package:flutter/material.dart';

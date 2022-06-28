@@ -14,7 +14,7 @@ class MainScreen extends StatelessWidget {
     var authprovider = Provider.of<AuthController>(context);
 
     return Scaffold(
-      key: context.read<MenuController>().scaffoldKey,
+      key: context.read<MenuController>().getscaffoldKey,
       drawer: SideMenu(),
       body: SafeArea(
         child: Row(
@@ -33,11 +33,15 @@ class MainScreen extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(defaultPadding),
                 child: ListView(
+                  controller: ScrollController(),
                   shrinkWrap: true,
                   children: [
                     Column(
                       children: [
-                        if (authprovider.currentuserModel != null) Header(),
+                        if (authprovider.currentuserModel != null)
+                          Header(fct: () {
+                            context.read<MenuController>().main_controlMenu();
+                          }),
                         SizedBox(height: defaultPadding),
                         context.watch<MenuController>().screens[context
                             .watch<MenuController>()

@@ -9,9 +9,8 @@ import 'package:provider/provider.dart';
 import '../../../shared/constants.dart';
 
 class Header extends StatelessWidget {
-  const Header({
-    Key? key,
-  }) : super(key: key);
+  final Function fct;
+  const Header({Key? key, required this.fct}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,9 +18,10 @@ class Header extends StatelessWidget {
       children: [
         if (!Responsive.isDesktop(context))
           IconButton(
-            icon: Icon(Icons.menu),
-            onPressed: context.read<MenuController>().controlMenu,
-          ),
+              icon: Icon(Icons.menu),
+              onPressed: () {
+                fct();
+              }),
         if (!Responsive.isMobile(context))
           Expanded(
             child: Text(
