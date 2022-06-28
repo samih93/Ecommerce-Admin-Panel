@@ -23,7 +23,7 @@ class ViewOrderScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var authprovider = Provider.of<AuthController>(context);
-
+    context.read<MenuController>()..onchangeIsInMainScreen();
     return Scaffold(
       key: context.read<MenuController>().getviewOrderscaffoldKey,
       drawer: SideMenu(),
@@ -52,8 +52,8 @@ class ViewOrderScreen extends StatelessWidget {
                         if (authprovider.currentuserModel != null)
                           Header(
                             fct: () {
-                              context
-                                  .read<MenuController>()..viewOrder_controlMenu();
+                              context.read<MenuController>()
+                                ..viewOrder_controlMenu();
                             },
                           ),
                         SizedBox(height: defaultPadding),

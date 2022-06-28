@@ -2,8 +2,10 @@ import 'package:ecommerce_admin_panel/controllers/MenuController.dart';
 import 'package:ecommerce_admin_panel/controllers/auth_controller.dart';
 import 'package:ecommerce_admin_panel/controllers/dashboard_controller.dart';
 import 'package:ecommerce_admin_panel/controllers/product_controller.dart';
+import 'package:ecommerce_admin_panel/main.dart';
 import 'package:ecommerce_admin_panel/models/menu_model.dart';
 import 'package:ecommerce_admin_panel/screens/dashboard/dashboard_screen.dart';
+import 'package:ecommerce_admin_panel/screens/main/main_screen.dart';
 import 'package:ecommerce_admin_panel/shared/constants.dart';
 import 'package:ecommerce_admin_panel/shared/responsive.dart';
 import 'package:flutter/material.dart';
@@ -59,10 +61,16 @@ class DrawerListTile extends StatelessWidget {
             selectedColor: Colors.grey.shade400,
             onTap: () async {
               if (i != 8) {
-                context.read<MenuController>().onChangeSelectedMenu(i);
-                if (i == 2)
-                  await context.read<ProductController>()
-                    ..getallProduct();
+                if (context.read<MenuController>().isInMainScreen == false) {
+                  context.read<MenuController>()..onChangeSelectedMenu(i);
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => MainScreen()));
+                } else {
+                  context.read<MenuController>().onChangeSelectedMenu(i);
+                }
+                // if (i == 2)
+                //   await context.read<ProductController>()
+                //     ..getallProduct();
 
                 if (Responsive.isMobile(context) ||
                     Responsive.isTablet(context)) Navigator.pop(context);

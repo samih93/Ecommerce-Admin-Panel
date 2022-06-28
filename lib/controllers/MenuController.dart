@@ -11,9 +11,39 @@ import 'package:flutter/material.dart';
 class MenuController extends ChangeNotifier {
   final AuthController? _authProvider;
 
+  int currentSelectedIndex = 0;
+
+  void onChangeSelectedMenu(index) {
+    print(index);
+    for (int i = 0; i < menuModelList.length; i++) {
+      if (i == index) {
+        print(menuModelList[i].title.toString() + " selected");
+        menuModelList[i].isselected = true;
+      } else
+        menuModelList[i].isselected = false;
+    }
+    currentSelectedIndex = index;
+    // menuModelList.forEach((element) {
+    //   print(element.title.toString() + " - " + element.isselected.toString());
+    // });
+    notifyListeners();
+  }
+
   final GlobalKey<ScaffoldState> getscaffoldKey = GlobalKey<ScaffoldState>();
   final GlobalKey<ScaffoldState> getviewOrderscaffoldKey =
       GlobalKey<ScaffoldState>();
+
+  void main_controlMenu() {
+    if (!getscaffoldKey.currentState!.isDrawerOpen) {
+      getscaffoldKey.currentState!.openDrawer();
+    }
+  }
+
+  void viewOrder_controlMenu() {
+    if (!getviewOrderscaffoldKey.currentState!.isDrawerOpen) {
+      getviewOrderscaffoldKey.currentState!.openDrawer();
+    }
+  }
 
   MenuController(this._authProvider) {
     buildMenu();
@@ -78,33 +108,8 @@ class MenuController extends ChangeNotifier {
     notifyListeners();
   }
 
-  void main_controlMenu() {
-    if (!getscaffoldKey.currentState!.isDrawerOpen) {
-      getscaffoldKey.currentState!.openDrawer();
-    }
-  }
-
-  void viewOrder_controlMenu() {
-    if (!getviewOrderscaffoldKey.currentState!.isDrawerOpen) {
-      getviewOrderscaffoldKey.currentState!.openDrawer();
-    }
-  }
-
-  int currentSelectedIndex = 0;
-
-  void onChangeSelectedMenu(index) {
-    print(index);
-    for (int i = 0; i < menuModelList.length; i++) {
-      if (i == index) {
-        print(menuModelList[i].title.toString() + " selected");
-        menuModelList[i].isselected = true;
-      } else
-        menuModelList[i].isselected = false;
-    }
-    currentSelectedIndex = index;
-    // menuModelList.forEach((element) {
-    //   print(element.title.toString() + " - " + element.isselected.toString());
-    // });
-    notifyListeners();
+  bool isInMainScreen = true;
+  void onchangeIsInMainScreen() {
+    isInMainScreen = !isInMainScreen;
   }
 }

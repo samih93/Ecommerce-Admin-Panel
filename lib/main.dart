@@ -37,7 +37,7 @@ Future<void> main() async {
       create: (context) => OrdersController()..getAllorders(),
     ),
     ChangeNotifierProvider(
-      create: (context) => ProductController(),
+      create: (context) => ProductController()..getallProduct(),
     ),
   ], child: MyApp()));
 }

@@ -120,7 +120,7 @@ class OrdersScreen extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
             child: Container(
-                width: 80,
+                width: 90,
                 child: Text(
                   orderstatus,
                   style: TextStyle(

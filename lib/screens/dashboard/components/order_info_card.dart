@@ -38,15 +38,17 @@ class OrderInfoCard extends StatelessWidget {
             children: [
               Container(
                 padding: EdgeInsets.all(defaultPadding * 0.75),
-                height: 40,
-                width: 40,
+                // height: 40,
+                // width: 40,
                 decoration: BoxDecoration(
                   color: order.color!.withOpacity(0.1),
                   borderRadius: const BorderRadius.all(Radius.circular(10)),
                 ),
-                child: SvgPicture.asset(
-                  'assets/icons/Documents.svg',
-                  color: order.color!,
+                child: Flexible(
+                  child: SvgPicture.asset(
+                    'assets/icons/Documents.svg',
+                    color: order.color!,
+                  ),
                 ),
               ),
               Icon(Icons.more_vert, color: Colors.white54)
@@ -55,7 +57,7 @@ class OrderInfoCard extends StatelessWidget {
           FittedBox(
             child: Text(
               order.title!,
-              style: TextStyle(fontSize:  20),
+              style: TextStyle(fontSize: 22),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),
@@ -81,11 +83,11 @@ class OrderInfoCard extends StatelessWidget {
                   borderRadius: const BorderRadius.all(Radius.circular(10)),
                 ),
                 child: Center(
-                  child: Text(
-                    order.numOfOrders.toString(),
-                    style: TextStyle(
-                        color: order.color!,
-                        fontSize: !Responsive.isMobile(context) ? 22 : 18),
+                  child: FittedBox(
+                    child: Text(
+                      order.numOfOrders.toString(),
+                      style: TextStyle(color: order.color!, fontSize: 22),
+                    ),
                   ),
                 ),
               ),
