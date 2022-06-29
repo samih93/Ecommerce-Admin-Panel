@@ -19,9 +19,13 @@ class Responsive extends StatelessWidget {
   static bool isMobile(BuildContext context) =>
       Utils.getscreensize(context).width < 600;
 
+  static bool isBigMobile(BuildContext context) =>
+      Utils.getscreensize(context).width > 600 &&
+      Utils.getscreensize(context).width < 800;
+
   static bool isTablet(BuildContext context) =>
       Utils.getscreensize(context).width < 1100 &&
-      Utils.getscreensize(context).width >= 600;
+      Utils.getscreensize(context).width >= 800;
 
   static bool isDesktop(BuildContext context) =>
       Utils.getscreensize(context).width >= 1100;

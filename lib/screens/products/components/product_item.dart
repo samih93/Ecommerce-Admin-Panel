@@ -24,7 +24,7 @@ class ProductItem extends StatelessWidget {
       child: Material(
         borderRadius: BorderRadius.circular(12),
         child: InkWell(
-          //borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(12),
           onTap: () {},
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -41,7 +41,11 @@ class ProductItem extends StatelessWidget {
                         child: Container(
                           height: Responsive.isDesktop(context)
                               ? size.width * 0.14
-                              : size.width * 0.28,
+                              : Responsive.isTablet(context)
+                                  ? size.width * 0.25
+                                  : Responsive.isBigMobile(context)
+                                      ? size.width * 0.4
+                                      : size.width * .6,
                           clipBehavior: Clip.none,
                           decoration: BoxDecoration(
                             color: const Color(0xff7c94b6),

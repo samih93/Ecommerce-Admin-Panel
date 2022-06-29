@@ -55,12 +55,6 @@ class MenuController extends ChangeNotifier {
     DashboardScreen(),
     OrdersScreen(),
     ProductScreen(),
-    ProductScreen(),
-    ProductScreen(),
-    ProductScreen(),
-    ProductScreen(),
-    ProductScreen(),
-    ProductScreen(),
   ];
 
   final _offline_screens_title = ['Login'];
@@ -68,12 +62,6 @@ class MenuController extends ChangeNotifier {
     'Dashboard',
     'Orders',
     'Products',
-    'Documents',
-    'Store',
-    'Notification',
-    'Profile',
-    'Settings'
-        'Logout'
   ];
 
   List<MenuModel> _offline_menuModelList = [
@@ -84,11 +72,6 @@ class MenuController extends ChangeNotifier {
     MenuModel("Dashboard", "assets/icons/menu_dashbord.svg", isselected: true),
     MenuModel("Orders", "assets/icons/menu_tran.svg"),
     MenuModel("Products", "assets/icons/menu_task.svg"),
-    MenuModel("Documents", "assets/icons/menu_doc.svg"),
-    MenuModel("Store", "assets/icons/menu_store.svg"),
-    MenuModel("Notification", "assets/icons/menu_notification.svg"),
-    MenuModel("Profile", "assets/icons/menu_profile.svg"),
-    MenuModel("Settings", "assets/icons/menu_setting.svg"),
     MenuModel("Logout", "assets/icons/menu_logout.svg"),
   ];
 

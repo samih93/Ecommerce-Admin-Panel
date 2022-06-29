@@ -60,7 +60,7 @@ class DrawerListTile extends StatelessWidget {
             selected: true,
             selectedColor: Colors.grey.shade400,
             onTap: () async {
-              if (i != 8) {
+              if (i != 3) {
                 if (context.read<MenuController>().isInMainScreen == false) {
                   context.read<MenuController>()..onChangeSelectedMenu(i);
                   Navigator.push(context,

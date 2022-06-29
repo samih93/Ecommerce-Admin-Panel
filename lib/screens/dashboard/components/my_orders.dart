@@ -41,20 +41,26 @@ class MyOrders extends StatelessWidget {
           ],
         ),
         SizedBox(height: defaultPadding),
-        Responsive(
-          mobile: OrderInfoCardGridView(
-            crossAxisCount: _size.width < 650
-                ? 2
-                : _size.width < 850
-                    ? 3
-                    : 4,
-            childAspectRatio: _size.width < 650 && _size.width > 350 ? 1.3 : 1,
-          ),
-          tablet: OrderInfoCardGridView(),
-          desktop: OrderInfoCardGridView(
-            childAspectRatio: _size.width < 1400 ? 1.1 : 1.4,
-          ),
+        OrderInfoCardGridView(
+          crossAxisCount: Responsive.isDesktop(context)
+              ? 4
+              : Responsive.isTablet(context)
+                  ? 3
+                  : Responsive.isBigMobile(context)
+                      ? 2
+                      : 1,
+          childAspectRatio: Responsive.isMobile(context)
+              ? 1.8
+              : Responsive.isBigMobile(context)
+                  ? 1.1
+                  : Responsive.isTablet(context)
+                      ? 1.1
+                      : 1.2,
         ),
+        // tablet: OrderInfoCardGridView(),
+        // desktop: OrderInfoCardGridView(
+        //   childAspectRatio: _size.width < 1400 ? 1.1 : 1.4,
+        // ),
       ],
     );
   }

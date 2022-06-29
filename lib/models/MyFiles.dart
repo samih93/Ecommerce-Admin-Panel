@@ -6,6 +6,7 @@ class OrderInfo {
   final int? numOfOrders;
   final Color? color;
   final int? percentage;
+  int? orderId;
 
   OrderInfo({
     this.svgSrc,

@@ -23,7 +23,9 @@ class ProductScreen extends StatelessWidget {
                   ? 4
                   : Responsive.isTablet(context)
                       ? 3
-                      : 2,
+                      : Responsive.isBigMobile(context)
+                          ? 2
+                          : 1,
               childAspectRatio: Responsive.isMobile(context) ? 1.1 : 0.8,
               crossAxisSpacing: defaultPadding - 4,
               mainAxisSpacing: defaultPadding - 4,
