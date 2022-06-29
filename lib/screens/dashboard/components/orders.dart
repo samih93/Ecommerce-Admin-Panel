@@ -9,8 +9,8 @@ import 'package:provider/provider.dart';
 import '../../../shared/constants.dart';
 import 'order_info_card.dart';
 
-class MyOrders extends StatelessWidget {
-  const MyOrders({
+class Orders extends StatelessWidget {
+  const Orders({
     Key? key,
   }) : super(key: key);
 

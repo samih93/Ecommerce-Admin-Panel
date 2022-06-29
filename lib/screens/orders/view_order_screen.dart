@@ -23,65 +23,40 @@ class ViewOrderScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var authprovider = Provider.of<AuthController>(context);
-    context.read<MenuController>()..onchangeIsInMainScreen();
+    // context.read<MenuController>()..onchangeIsInMainScreen();
     return Scaffold(
-      key: context.read<MenuController>().getviewOrderscaffoldKey,
-      drawer: SideMenu(),
-      body: SafeArea(
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(defaultPadding),
+        child: ListView(
+          controller: ScrollController(),
+          shrinkWrap: true,
           children: [
-            // We want this side menu only for large screen
-            if (Responsive.isDesktop(context))
-              Expanded(
-                // default flex = 1
-                // and it takes 1/6 part of the screen
-                child: SideMenu(),
-              ),
-            Expanded(
-              // It takes 5/6 part of the screen
-              flex: 5,
-              child: Padding(
-                padding: const EdgeInsets.all(defaultPadding),
-                child: ListView(
-                  controller: ScrollController(),
-                  shrinkWrap: true,
+            Padding(
+              padding: EdgeInsets.all(defaultPadding),
+              child: Container(
+                //  width: double.infinity,
+                child: Column(
+                  crossAxisAlignment: Responsive.isMobile(context) ||
+                          Responsive.isBigMobile(context)
+                      ? CrossAxisAlignment.center
+                      : CrossAxisAlignment.start,
                   children: [
-                    Column(
-                      children: [
-                        if (authprovider.currentuserModel != null)
-                          Header(
-                            fct: () {
-                              context.read<MenuController>()
-                                ..viewOrder_controlMenu();
-                            },
-                          ),
-                        SizedBox(height: defaultPadding),
-                        Padding(
-                          padding: EdgeInsets.all(defaultPadding),
-                          child: Container(
-                            //  width: double.infinity,
-                            child: Column(
-                              children: [
-                                OrderDetails(order),
-                                SizedBox(
-                                  height: 20,
-                                ),
-                                PersonelInformation(order),
-                                SizedBox(
-                                  height: 20,
-                                ),
-                                ShippingAddress(order),
-                                SizedBox(
-                                  height: 20,
-                                ),
-                                OrderItems(order)
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
+                    OrderDetails(order),
+                    SizedBox(
+                      height: 20,
                     ),
+                    PersonelInformation(order),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    ShippingAddress(order),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    OrderItems(order)
                   ],
                 ),
               ),

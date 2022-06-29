@@ -61,13 +61,14 @@ class DrawerListTile extends StatelessWidget {
             selectedColor: Colors.grey.shade400,
             onTap: () async {
               if (i != 3) {
-                if (context.read<MenuController>().isInMainScreen == false) {
-                  context.read<MenuController>()..onChangeSelectedMenu(i);
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => MainScreen()));
-                } else {
-                  context.read<MenuController>().onChangeSelectedMenu(i);
-                }
+                // if (context.read<MenuController>().isInMainScreen == false) {
+                //   context.read<MenuController>()..onChangeSelectedMenu(i);
+                //   Navigator.push(context,
+                //       MaterialPageRoute(builder: (context) => MainScreen()));
+                // } else {
+                // }
+                context.read<MenuController>().onChangeSelectedMenu(i);
+
                 // if (i == 2)
                 //   await context.read<ProductController>()
                 //     ..getallProduct();

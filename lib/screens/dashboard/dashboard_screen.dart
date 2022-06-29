@@ -1,6 +1,6 @@
 import 'package:ecommerce_admin_panel/controllers/dashboard_controller.dart';
 import 'package:ecommerce_admin_panel/controllers/orders_controller.dart';
-import 'package:ecommerce_admin_panel/screens/dashboard/components/my_orders.dart';
+import 'package:ecommerce_admin_panel/screens/dashboard/components/orders.dart';
 import 'package:ecommerce_admin_panel/screens/dashboard/components/recent_files.dart';
 import 'package:ecommerce_admin_panel/shared/responsive.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +24,7 @@ class DashboardScreen extends StatelessWidget {
                     flex: 5,
                     child: Column(
                       children: [
-                        MyOrders(),
+                        Orders(),
                         SizedBox(height: defaultPadding),
                         //RecentFiles(),
                         if (Responsive.isMobile(context))

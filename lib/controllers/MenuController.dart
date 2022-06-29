@@ -1,9 +1,11 @@
 import 'package:ecommerce_admin_panel/controllers/auth_controller.dart';
 import 'package:ecommerce_admin_panel/models/UserModel.dart';
 import 'package:ecommerce_admin_panel/models/menu_model.dart';
+import 'package:ecommerce_admin_panel/models/ordermodel.dart';
 import 'package:ecommerce_admin_panel/screens/dashboard/dashboard_screen.dart';
 import 'package:ecommerce_admin_panel/screens/login/login_screen.dart';
 import 'package:ecommerce_admin_panel/screens/orders/orders_screen.dart';
+import 'package:ecommerce_admin_panel/screens/orders/view_order_screen.dart';
 import 'package:ecommerce_admin_panel/screens/products/products_screen.dart';
 import 'package:ecommerce_admin_panel/shared/constants.dart';
 import 'package:flutter/material.dart';
@@ -89,10 +91,5 @@ class MenuController extends ChangeNotifier {
       screens = _screens;
     }
     notifyListeners();
-  }
-
-  bool isInMainScreen = true;
-  void onchangeIsInMainScreen() {
-    isInMainScreen = !isInMainScreen;
   }
 }

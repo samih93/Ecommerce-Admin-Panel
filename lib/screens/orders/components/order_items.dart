@@ -1,4 +1,5 @@
 import 'package:ecommerce_admin_panel/models/ordermodel.dart';
+import 'package:ecommerce_admin_panel/shared/constants.dart';
 import 'package:ecommerce_admin_panel/shared/responsive.dart';
 import 'package:ecommerce_admin_panel/shared/utils.dart';
 import 'package:flutter/material.dart';
@@ -11,24 +12,29 @@ class OrderItems extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: EdgeInsets.all(defaultPadding),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8),
+        color: secondaryColor,
+      ),
+      width: Responsive.isDesktop(context)
+          ? 650
+          : Responsive.isTablet(context)
+              ? 600
+              : Responsive.isBigMobile(context)
+                  ? 550
+                  : 400,
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              Expanded(child: Divider()),
-              SizedBox(
-                width: 10,
-              ),
-              Text(
-                "Order Items",
-                style: TextStyle(fontSize: 30),
-              ),
-              SizedBox(
-                width: 10,
-              ),
-              Expanded(child: Divider()),
-            ],
+          Text(
+            "Order Items",
+            style: TextStyle(fontSize: 30),
           ),
+          Divider(
+            thickness: 2,
+          ),
+
           SizedBox(
             height: 10,
           ),
@@ -42,15 +48,15 @@ class OrderItems extends StatelessWidget {
                   child: ConstrainedBox(
                     constraints: BoxConstraints(
                         maxHeight: Responsive.isMobile(context)
-                            ? Utils.getscreensize(context).width * .35
+                            ? Utils.getscreensize(context).width * .38
                             : Responsive.isTablet(context)
-                                ? Utils.getscreensize(context).width * 0.25
-                                : Utils.getscreensize(context).width * 0.17),
+                                ? Utils.getscreensize(context).width * 0.28
+                                : Utils.getscreensize(context).width * 0.2),
                     child: Row(
                       children: [
                         Container(
                           width: Responsive.isMobile(context)
-                              ? Utils.getscreensize(context).width * .35
+                              ? Utils.getscreensize(context).width * .3
                               : Responsive.isTablet(context)
                                   ? Utils.getscreensize(context).width * 0.25
                                   : Utils.getscreensize(context).width * 0.17,
