@@ -38,7 +38,9 @@ dependencies:
   #dio
   dio: ^4.0.6
 
-  syncfusion_flutter_datagrid: ^20.1.57
+ # syncfusion_flutter_datagrid: ^20.1.57
+  syncfusion_flutter_charts: ^20.2.36
+
 
   #firebase
   cloud_firestore: ^3.1.18

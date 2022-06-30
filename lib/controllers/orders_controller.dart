@@ -1,4 +1,4 @@
-import 'package:ecommerce_admin_panel/models/MyFiles.dart';
+import 'package:ecommerce_admin_panel/models/MyOrders.dart';
 import 'package:ecommerce_admin_panel/models/ordermodel.dart';
 import 'package:ecommerce_admin_panel/services/orders/repository_order.dart';
 import 'package:ecommerce_admin_panel/shared/constants.dart';
@@ -35,7 +35,9 @@ class OrdersController extends ChangeNotifier {
       (completedOrderCount / allOrders.length * 100).toInt();
 
   List<Order> original_all_orders = [];
-  List demoMyOrder = [];
+  List<OrderInfo> demoMyOrder = [];
+  List<OrderInfo> get chartData =>
+      demoMyOrder.where((element) => element.title != "All Orders").toList();
 
   Future<void> getAllorders() async {
     isloadingGetAllProduct = true;

@@ -34,8 +34,6 @@ class RepositoryOrder implements IrepositoryOrder {
             .doc(docId)
             .update({'status': statusvalue});
       }
-      //Order order = Order.fromJson(value.docs.first.data());
-      // print(order.toJson());
     });
   }
 }

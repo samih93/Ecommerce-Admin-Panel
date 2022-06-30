@@ -1,7 +1,7 @@
 import 'package:ecommerce_admin_panel/controllers/dashboard_controller.dart';
 import 'package:ecommerce_admin_panel/controllers/orders_controller.dart';
 import 'package:ecommerce_admin_panel/screens/dashboard/components/orders.dart';
-import 'package:ecommerce_admin_panel/screens/dashboard/components/recent_files.dart';
+import 'package:ecommerce_admin_panel/screens/dashboard/pie_chart_data.dart';
 import 'package:ecommerce_admin_panel/shared/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -30,6 +30,7 @@ class DashboardScreen extends StatelessWidget {
                         if (Responsive.isMobile(context))
                           SizedBox(height: defaultPadding),
                         // if (Responsive.isMobile(context)) StarageDetails(),
+                        PieChartData(),
                       ],
                     ),
                   ),
