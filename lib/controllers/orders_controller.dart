@@ -39,7 +39,7 @@ class OrdersController extends ChangeNotifier {
   List<OrderInfo> get chartData =>
       demoMyOrder.where((element) => element.title != "All Orders").toList();
 
-  List<OrderInfo> radialChart = [
+  List<OrderInfo> topsellingChart = [
     OrderInfo(title: "nike 584", numOfOrders: 50, color: Colors.purple),
     OrderInfo(title: "adidas 584", numOfOrders: 30, color: Colors.deepOrange),
     OrderInfo(title: "puma asdasd ", numOfOrders: 10, color: Colors.amber),

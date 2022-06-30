@@ -1,8 +1,8 @@
 import 'package:ecommerce_admin_panel/controllers/dashboard_controller.dart';
 import 'package:ecommerce_admin_panel/controllers/orders_controller.dart';
 import 'package:ecommerce_admin_panel/screens/dashboard/components/orders.dart';
-import 'package:ecommerce_admin_panel/screens/dashboard/components/pie_chart.dart';
-import 'package:ecommerce_admin_panel/screens/dashboard/components/radial_chart.dart';
+import 'package:ecommerce_admin_panel/screens/dashboard/components/orders_pie_chart.dart';
+import 'package:ecommerce_admin_panel/screens/dashboard/components/top_selling_pie_chart.dart';
 import 'package:ecommerce_admin_panel/shared/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -31,18 +31,18 @@ class DashboardScreen extends StatelessWidget {
                         !Responsive.isMobile(context)
                             ? Row(
                                 children: [
-                                  Expanded(child: PieChart()),
+                                  Expanded(child: OrdersPieChart()),
                                   SizedBox(width: defaultPadding),
-                                  Expanded(child: RadialChart()),
+                                  Expanded(child: TopSellingPieChart()),
                                 ],
                               )
                             : Column(
                                 children: [
-                                  PieChart(),
+                                  OrdersPieChart(),
                                   SizedBox(
                                     height: defaultPadding,
                                   ),
-                                  RadialChart(),
+                                  TopSellingPieChart(),
                                 ],
                               ),
                       ],

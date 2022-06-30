@@ -7,8 +7,8 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
-class RadialChart extends StatelessWidget {
-  const RadialChart({Key? key}) : super(key: key);
+class OrdersPieChart extends StatelessWidget {
+  OrdersPieChart();
 
   @override
   Widget build(BuildContext context) {
@@ -18,20 +18,25 @@ class RadialChart extends StatelessWidget {
           color: secondaryColor,
         ),
         child: SfCircularChart(
-            title: ChartTitle(text: 'Top 5 Selling Products'),
+            title: ChartTitle(text: 'Orders Status'),
             legend: Legend(isVisible: true),
+            // tooltipBehavior:
+            //     TooltipBehavior(enable: true, format: 'point.x : point.y%'),
             series: <CircularSeries>[
-              // Renders radial bar chart
-              RadialBarSeries<OrderInfo, String>(
+              // Render pie chart
+              PieSeries<OrderInfo, String>(
+                  explode: true,
+                  explodeIndex: 1,
                   radius: '55%',
                   dataLabelSettings: DataLabelSettings(
+                      isVisible: true,
                       labelIntersectAction: LabelIntersectAction.shift,
                       overflowMode: OverflowMode.shift,
                       showZeroValue: true,
                       labelPosition: ChartDataLabelPosition.inside,
                       connectorLineSettings:
                           ConnectorLineSettings(type: ConnectorType.curve)),
-                  dataSource: context.read<OrdersController>().radialChart,
+                  dataSource: context.read<OrdersController>().chartData,
                   pointColorMapper: (OrderInfo data, _) => data.color,
                   dataLabelMapper: (OrderInfo data, _) =>
                       data.title.toString() +
@@ -39,7 +44,7 @@ class RadialChart extends StatelessWidget {
                       data.percentage.toString() +
                       "%",
                   xValueMapper: (OrderInfo data, _) => data.title,
-                  yValueMapper: (OrderInfo data, _) => data.numOfOrders)
+                  yValueMapper: (OrderInfo data, _) => data.percentage)
             ]));
   }
 }
