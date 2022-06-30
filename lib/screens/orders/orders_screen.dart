@@ -120,16 +120,16 @@ class OrdersScreen extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
             child: Container(
-                width: 90,
+                // width: 90,
                 child: Text(
-                  orderstatus,
-                  style: TextStyle(
-                      color: orderstatus.toString() == "completed"
-                          ? Colors.green.shade400
-                          : orderstatus.toString() == "view"
-                              ? Colors.white70
-                              : Colors.blue.shade400),
-                )),
+              orderstatus,
+              style: TextStyle(
+                  color: orderstatus.toString() == "completed"
+                      ? Colors.green.shade400
+                      : orderstatus.toString() == "view"
+                          ? Colors.white70
+                          : Colors.blue.shade400),
+            )),
           ),
         );
       }).toList(),

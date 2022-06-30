@@ -11,19 +11,14 @@ class OrderItems extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = Utils.getscreensize(context);
     return Container(
       padding: EdgeInsets.all(defaultPadding),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
         color: secondaryColor,
       ),
-      width: Responsive.isDesktop(context)
-          ? 650
-          : Responsive.isTablet(context)
-              ? 600
-              : Responsive.isBigMobile(context)
-                  ? 550
-                  : 400,
+      width: !Responsive.isDesktop(context) ? 400 : 650,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -47,35 +42,43 @@ class OrderItems extends StatelessWidget {
                   onTap: () {},
                   child: ConstrainedBox(
                     constraints: BoxConstraints(
-                        maxHeight: Responsive.isMobile(context)
-                            ? Utils.getscreensize(context).width * .38
-                            : Responsive.isTablet(context)
-                                ? Utils.getscreensize(context).width * 0.28
-                                : Utils.getscreensize(context).width * 0.2),
+                        // maxHeight: Responsive.isMobile(context)
+                        //     ? size.width * .38
+                        //     : Responsive.isTablet(context)
+                        //         ? size.width * 0.3
+                        //         : size.width * 0.2),
+                        ),
                     child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Container(
-                          width: Responsive.isMobile(context)
-                              ? Utils.getscreensize(context).width * .3
-                              : Responsive.isTablet(context)
-                                  ? Utils.getscreensize(context).width * 0.25
-                                  : Utils.getscreensize(context).width * 0.17,
-                          height: Responsive.isMobile(context)
-                              ? Utils.getscreensize(context).width * .35
-                              : Responsive.isTablet(context)
-                                  ? Utils.getscreensize(context).width * 0.25
-                                  : Utils.getscreensize(context).width * 0.17,
+                          // width: Responsive.isMobile(context)
+                          //     ? size.width * .3
+                          //     : Responsive.isBigMobile(context)
+                          //         ? size.width * 0.25
+                          //         : Responsive.isTablet(context)
+                          //             ? size.width * 0.24
+                          //             : 0.2,
+                          // height: Responsive.isMobile(context)
+                          //     ? size.width * .35
+                          //     : Responsive.isTablet(context)
+                          //         ? size.width * 0.25
+                          //         : size.width * 0.17,
                           child: item.image != ""
-                              ? Image.network(
-                                  item.image.toString(),
-                                  fit: BoxFit.fill,
+                              ? Flexible(
+                                  child: Image.network(
+                                    item.image.toString(),
+                                    fit: BoxFit.fill,
+                                  ),
                                 )
                               : Image.asset(
                                   "assets/images/deafult_product.png"),
                         ),
+                        SizedBox(
+                          width: 10,
+                        ),
                         Expanded(
                           child: Container(
-                            padding: EdgeInsets.only(top: 15, left: 20),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -101,7 +104,7 @@ class OrderItems extends StatelessWidget {
                                   "${item.price.toString()} * ${item.quantity.toString()}",
                                 ),
                                 SizedBox(
-                                  height: 20,
+                                  height: 10,
                                 ),
                               ],
                             ),

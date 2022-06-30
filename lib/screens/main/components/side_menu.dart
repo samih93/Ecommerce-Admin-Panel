@@ -74,6 +74,7 @@ class DrawerListTile extends StatelessWidget {
                 //     ..getallProduct();
 
                 if (Responsive.isMobile(context) ||
+                    Responsive.isBigMobile(context) ||
                     Responsive.isTablet(context)) Navigator.pop(context);
               } else {
                 context.read<AuthController>()

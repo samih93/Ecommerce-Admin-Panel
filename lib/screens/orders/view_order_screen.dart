@@ -39,10 +39,7 @@ class ViewOrderScreen extends StatelessWidget {
               child: Container(
                 //  width: double.infinity,
                 child: Column(
-                  crossAxisAlignment: Responsive.isMobile(context) ||
-                          Responsive.isBigMobile(context)
-                      ? CrossAxisAlignment.center
-                      : CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     OrderDetails(order),
                     SizedBox(
