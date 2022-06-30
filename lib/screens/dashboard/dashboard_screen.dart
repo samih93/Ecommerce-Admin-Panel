@@ -1,14 +1,13 @@
 import 'package:ecommerce_admin_panel/controllers/dashboard_controller.dart';
 import 'package:ecommerce_admin_panel/controllers/orders_controller.dart';
 import 'package:ecommerce_admin_panel/screens/dashboard/components/orders.dart';
-import 'package:ecommerce_admin_panel/screens/dashboard/pie_chart_data.dart';
+import 'package:ecommerce_admin_panel/screens/dashboard/components/pie_chart.dart';
+import 'package:ecommerce_admin_panel/screens/dashboard/components/radial_chart.dart';
 import 'package:ecommerce_admin_panel/shared/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../shared/constants.dart';
-
-import 'components/storage_details.dart';
 
 class DashboardScreen extends StatelessWidget {
   @override
@@ -27,10 +26,25 @@ class DashboardScreen extends StatelessWidget {
                         Orders(),
                         SizedBox(height: defaultPadding),
                         //RecentFiles(),
-                        if (Responsive.isMobile(context))
-                          SizedBox(height: defaultPadding),
-                        // if (Responsive.isMobile(context)) StarageDetails(),
-                        PieChartData(),
+                        // if (Responsive.isMobile(context))
+                        //   SizedBox(height: defaultPadding),
+                        !Responsive.isMobile(context)
+                            ? Row(
+                                children: [
+                                  Expanded(child: PieChart()),
+                                  SizedBox(width: defaultPadding),
+                                  Expanded(child: RadialChart()),
+                                ],
+                              )
+                            : Column(
+                                children: [
+                                  PieChart(),
+                                  SizedBox(
+                                    height: defaultPadding,
+                                  ),
+                                  RadialChart(),
+                                ],
+                              ),
                       ],
                     ),
                   ),
