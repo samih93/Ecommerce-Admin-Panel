@@ -13,27 +13,49 @@ class ProductScreen extends StatelessWidget {
     Size size = Utils.getscreensize(context);
     return context.watch<ProductController>().isloadingGetProduct
         ? CircularProgressIndicator()
-        : GridView.builder(
-            physics: const NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            itemCount:
-                context.watch<ProductController>().list_of_product.length,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: Responsive.isDesktop(context)
-                  ? 4
-                  : Responsive.isTablet(context)
-                      ? 3
-                      : Responsive.isBigMobile(context)
-                          ? 2
-                          : 1,
-              childAspectRatio: Responsive.isMobile(context) ? 1.1 : 0.8,
-              crossAxisSpacing: defaultPadding - 4,
-              mainAxisSpacing: defaultPadding - 4,
-            ),
-            itemBuilder: (context, index) {
-              return ProductItem(
-                  context.watch<ProductController>().list_of_product[index]);
-            });
+        : Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  ElevatedButton.icon(
+                    style: TextButton.styleFrom(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: defaultPadding,
+                        vertical: defaultPadding /
+                            (Responsive.isMobile(context) ? 2 : 1),
+                      ),
+                    ),
+                    onPressed: () {},
+                    icon: Icon(Icons.add),
+                    label: Text("Add New"),
+                  ),
+                ],
+              ),
+              GridView.builder(
+                  physics: const NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount:
+                      context.watch<ProductController>().list_of_product.length,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: Responsive.isDesktop(context)
+                        ? 4
+                        : Responsive.isTablet(context)
+                            ? 3
+                            : Responsive.isBigMobile(context)
+                                ? 2
+                                : 1,
+                    childAspectRatio: Responsive.isMobile(context) ? 1.1 : 0.8,
+                    crossAxisSpacing: defaultPadding,
+                    mainAxisSpacing: defaultPadding,
+                  ),
+                  itemBuilder: (context, index) {
+                    return ProductItem(context
+                        .watch<ProductController>()
+                        .list_of_product[index]);
+                  }),
+            ],
+          );
     // return Column(
     //                 children: [
     //                   Responsive(
