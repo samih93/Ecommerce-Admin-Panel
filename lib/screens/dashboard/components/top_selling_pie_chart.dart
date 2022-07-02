@@ -37,8 +37,7 @@ class TopSellingPieChart extends StatelessWidget {
                           ConnectorLineSettings(type: ConnectorType.curve)),
                   dataSource:
                       context.read<OrdersController>().list_of_top_selling,
-                  pointColorMapper: (TopSellingModel data, _) =>
-                      Color.fromARGB(255, 24, 96, 204),
+                  pointColorMapper: (TopSellingModel data, _) => data.color,
                   dataLabelMapper: (TopSellingModel data, _) =>
                       data.nb.toString(),
                   xValueMapper: (TopSellingModel data, _) => data.name,

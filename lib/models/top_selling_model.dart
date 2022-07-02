@@ -1,7 +1,10 @@
+import 'package:flutter/material.dart';
+
 class TopSellingModel {
   String? name;
   String? productId;
   int? nb;
+  Color? color;
 
   TopSellingModel(this.name, this.productId, this.nb);
 

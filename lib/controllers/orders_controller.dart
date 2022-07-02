@@ -54,13 +54,14 @@ class OrdersController extends ChangeNotifier {
         numOfOrders: 3,
         color: Colors.redAccent),
   ];
-  List<TopSellingModel> list_of_top_selling = [];
+  List<TopSellingModel> get list_of_top_selling =>
+      _list_of_topselling.take(5).toList();
+  List<TopSellingModel> _list_of_topselling = [];
 
   Future<void> getAllorders() async {
-    List<TopSellingModel>? _list_of_topselling = [];
-
     isloadingGetAllProduct = true;
     demoMyOrder = [];
+    _list_of_topselling = [];
     notifyListeners();
     allOrders = await repositoryOrder.getorders();
     allOrders.forEach((element) {
@@ -69,29 +70,36 @@ class OrdersController extends ChangeNotifier {
         element.list_of_status = ["view", "delivered"];
       if (element.status == "delivered")
         element.list_of_status = ["view", "completed"];
+
+      // add all products with qty in _list_of_topselling
       element.orderItems!.forEach((val) {
         _list_of_topselling
             .add(TopSellingModel(val.name, val.productId, val.quantity));
       });
     });
 
+    // save all orders in temp list
     original_all_orders = allOrders;
+
+    // group by product id  ==> Map<String?, List<TopSellingModel>> newMap
     var newMap =
         groupBy(_list_of_topselling, (TopSellingModel obj) => obj.productId);
-    // print(_list_of_topselling);
-    // _list_of_topselling.forEach((element) {
-    //   print(element);
-    // });
+
+    _list_of_topselling.clear();
+
+    //adding each item and how many sales
     newMap.forEach((key, value) {
       int count = 0;
       value.forEach((element) {
         count += element.nb!;
       });
-      list_of_top_selling.add(TopSellingModel(value.first.name, key, count));
+      _list_of_topselling.add(TopSellingModel(value.first.name, key, count));
     });
 
-    list_of_top_selling.sort((a, b) => b.nb!.compareTo(a.nb!));
-    list_of_top_selling.take(5);
+// order by number desc
+    _list_of_topselling.sort((a, b) => b.nb!.compareTo(a.nb!));
+
+    _setcolors(list_of_top_selling);
     notifyListeners();
 
 //   all orders cart
@@ -131,6 +139,14 @@ class OrdersController extends ChangeNotifier {
     isloadingGetAllProduct = false;
 
     notifyListeners();
+  }
+
+  _setcolors(List<TopSellingModel> list) {
+    list[0].color = Colors.red;
+    list[1].color = Colors.blue;
+    list[2].color = Colors.pink;
+    list[3].color = Colors.yellow;
+    list[4].color = Colors.green;
   }
 
 // Search in orders
