@@ -1,9 +1,11 @@
 import 'package:ecommerce_admin_panel/models/MyOrders.dart';
 import 'package:ecommerce_admin_panel/models/ordermodel.dart';
+import 'package:ecommerce_admin_panel/models/top_selling_model.dart';
 import 'package:ecommerce_admin_panel/services/orders/repository_order.dart';
 import 'package:ecommerce_admin_panel/shared/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import "package:collection/collection.dart";
 
 class OrdersController extends ChangeNotifier {
   RepositoryOrder repositoryOrder = RepositoryOrder();
@@ -52,8 +54,11 @@ class OrdersController extends ChangeNotifier {
         numOfOrders: 3,
         color: Colors.redAccent),
   ];
+  Map map_of_top_selling = {};
 
   Future<void> getAllorders() async {
+    List<Map<String, dynamic>>? _list_of_topselling = [];
+
     isloadingGetAllProduct = true;
     demoMyOrder = [];
     notifyListeners();
@@ -64,8 +69,21 @@ class OrdersController extends ChangeNotifier {
         element.list_of_status = ["view", "delivered"];
       if (element.status == "delivered")
         element.list_of_status = ["view", "completed"];
+      element.orderItems!.forEach((val) {
+        _list_of_topselling
+            .add(TopSellingModel(val.productId, val.quantity).toJson());
+      });
     });
+
     original_all_orders = allOrders;
+    // var newMap = groupBy(_list_of_topselling, (Map obj) => obj['name']);
+    // print(_list_of_topselling);
+    _list_of_topselling.forEach((element) {
+      print(element);
+    });
+//TODO:
+    //_list_of_topselling.map((e) => map_of_top_selling.containsKey(e['name']? map_of_top_selling[e['name'] = );
+    // print(newMap);
 
 //   all orders cart
     demoMyOrder.add(OrderInfo(
