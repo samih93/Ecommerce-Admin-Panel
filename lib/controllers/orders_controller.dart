@@ -54,10 +54,10 @@ class OrdersController extends ChangeNotifier {
         numOfOrders: 3,
         color: Colors.redAccent),
   ];
-  Map map_of_top_selling = {};
+  List<TopSellingModel> list_of_top_selling = [];
 
   Future<void> getAllorders() async {
-    List<Map<String, dynamic>>? _list_of_topselling = [];
+    List<TopSellingModel>? _list_of_topselling = [];
 
     isloadingGetAllProduct = true;
     demoMyOrder = [];
@@ -71,19 +71,28 @@ class OrdersController extends ChangeNotifier {
         element.list_of_status = ["view", "completed"];
       element.orderItems!.forEach((val) {
         _list_of_topselling
-            .add(TopSellingModel(val.productId, val.quantity).toJson());
+            .add(TopSellingModel(val.name, val.productId, val.quantity));
       });
     });
 
     original_all_orders = allOrders;
-    // var newMap = groupBy(_list_of_topselling, (Map obj) => obj['name']);
+    var newMap =
+        groupBy(_list_of_topselling, (TopSellingModel obj) => obj.productId);
     // print(_list_of_topselling);
-    _list_of_topselling.forEach((element) {
-      print(element);
+    // _list_of_topselling.forEach((element) {
+    //   print(element);
+    // });
+    newMap.forEach((key, value) {
+      int count = 0;
+      value.forEach((element) {
+        count += element.nb!;
+      });
+      list_of_top_selling.add(TopSellingModel(value.first.name, key, count));
     });
-//TODO:
-    //_list_of_topselling.map((e) => map_of_top_selling.containsKey(e['name']? map_of_top_selling[e['name'] = );
-    // print(newMap);
+
+    list_of_top_selling.sort((a, b) => b.nb!.compareTo(a.nb!));
+    list_of_top_selling.take(5);
+    notifyListeners();
 
 //   all orders cart
     demoMyOrder.add(OrderInfo(

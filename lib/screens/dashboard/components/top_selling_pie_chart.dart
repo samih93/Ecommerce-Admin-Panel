@@ -1,5 +1,6 @@
 import 'package:ecommerce_admin_panel/controllers/orders_controller.dart';
 import 'package:ecommerce_admin_panel/models/MyOrders.dart';
+import 'package:ecommerce_admin_panel/models/top_selling_model.dart';
 import 'package:ecommerce_admin_panel/shared/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
@@ -22,7 +23,7 @@ class TopSellingPieChart extends StatelessWidget {
             legend: Legend(isVisible: true),
             series: <CircularSeries>[
               // Renders radial bar chart
-              PieSeries<OrderInfo, String>(
+              PieSeries<TopSellingModel, String>(
                   explode: true,
                   explodeIndex: 1,
                   radius: '55%',
@@ -34,16 +35,14 @@ class TopSellingPieChart extends StatelessWidget {
                       labelPosition: ChartDataLabelPosition.inside,
                       connectorLineSettings:
                           ConnectorLineSettings(type: ConnectorType.curve)),
-                  dataSource: context.read<OrdersController>().topsellingChart,
-                  pointColorMapper: (OrderInfo data, _) => data.color,
-                  dataLabelMapper: (OrderInfo data, _) =>
-                      data.title.toString() +
-                      "\n" +
-                      "(" +
-                      data.numOfOrders.toString() +
-                      ")",
-                  xValueMapper: (OrderInfo data, _) => data.title,
-                  yValueMapper: (OrderInfo data, _) => data.numOfOrders)
+                  dataSource:
+                      context.read<OrdersController>().list_of_top_selling,
+                  pointColorMapper: (TopSellingModel data, _) =>
+                      Color.fromARGB(255, 24, 96, 204),
+                  dataLabelMapper: (TopSellingModel data, _) =>
+                      data.nb.toString(),
+                  xValueMapper: (TopSellingModel data, _) => data.name,
+                  yValueMapper: (TopSellingModel data, _) => data.nb)
             ]));
   }
 }
