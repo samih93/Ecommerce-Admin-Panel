@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 
+
+// Used to get data localy using api 
 class DioHelper {
   static Dio? dio;
 
